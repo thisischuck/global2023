@@ -36,20 +36,31 @@ If the mole is standing on a root, the mole eats the root, playing animations an
 
 ### Types
 There will be a variety of roots based on the following stats:
+* Growth Rate;
 * Weaknesses;
 * Thoughness;
-* Behaviour.
 
 ## Waves
 
 The game loop will be controlled by spawn waves. These are configurable by design and will be pre determinated until round 10. After this round, the waves will be randomnly generated, getting harder and harder to beat.
 
 ### Waves stats:
+* __List of breaches__;
 * __Number of roots__;
 * __Spawn zones__;
-* __Available store items__;
-* __Rest time__;
+* __List of store items__;
+* __Rest Duration__;
+* __Wave duration__;
 * __Boss?__;
+
+#### Breache:
+* Angle of attack: 1 - 12
+* List of roots
+* Time of attack: 0 - 1: percent in wave duration
+#### Store Items:
+A list of possible items to be picked at the begining of the wave
+#### Rest Duration:
+#### Wave duration:
 
 ## Deployables
 
@@ -66,9 +77,19 @@ These are special abilities that affect the mole performance directly:
 * __Boots__: increase speed;
 * __Teeth__: increase damage;
 
-
 ## Input
 
 * __Left Arrow__ and __Right Arrow__: rotate left or right
 * __Left joystik__: rotate accordingly
 * __X or A__: Interact
+
+## Sound 
+
+The sound will have to be modular, in order to be triggered layered, in key situations:
+* Round start;
+* Round end;
+* Tension moments;
+* etc.
+
+Wave after wave, the main song loop will get layered instruments played on top of each other, adding tension and rythm to the game.
+
