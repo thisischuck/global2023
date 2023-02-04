@@ -14,14 +14,13 @@ public class WaveManager : MonoBehaviour
 
     public Wave CurrentWave { get => _currentWave; }
 
-    private void Start()
+    private void Awake()
     {
         _waveIterator = _waves.GetEnumerator();
-        //StartNextWave();
     }
 
     [ContextMenu("Start Next Wave")]
-    private void StartNextWave()
+    public void StartNextWave()
     {
         StopAllCoroutines();
 

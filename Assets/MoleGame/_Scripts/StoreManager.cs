@@ -8,6 +8,12 @@ public class StoreManager : MonoBehaviour
     [SerializeField] GameObject _slotsContainer;
     [SerializeField] List<StoreSlot> _itemSlots;
 
+
+    private void Start()
+    {
+        HideStore();
+    }
+
     public void UpdateAvailableStock(List<Item> stock)
     {
         ClearStock();
