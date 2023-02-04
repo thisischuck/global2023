@@ -664,7 +664,7 @@ public static class MathTools
             result = 180f - Mathf.Abs(result) + 180f;
         }
 
-        return result;
+        return 360.0f - result;
     }
 
     #endregion

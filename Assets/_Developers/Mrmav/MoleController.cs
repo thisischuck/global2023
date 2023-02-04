@@ -72,7 +72,7 @@ public class MoleController : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0f, 0f, GetAngle());
 
-        //Debug.Log("Angle: " + GetAngle() + "___ To360: " + MathTools.To360(GetAngle()));
+        Debug.Log("Angle: " + GetAngle() + "___ To360: " + (360f - MathTools.To360(GetAngle())));
 
     }
 
