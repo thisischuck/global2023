@@ -43,32 +43,32 @@ public class MoleController : MonoBehaviour
     {
 
         Vector2 stickValues = MovementStickAction.ReadValue<Vector2>();
+        Vector2 kbInput = MovementInputAction.ReadValue<Vector2>();
         Vector3 force = Vector3.zero;
 
         if (stickValues.magnitude > 0f)
         {
+            // joystick
+            force = CalculateMovementForce(stickValues);
 
-            ApplyForce(CalculateMovementForce(stickValues));
-
-        } else
+        } else if (kbInput.magnitude > 0f)
         {
-            Vector2 input = MovementInputAction.ReadValue<Vector2>();
+            // kb input
+            // generate a fake stick input
+
             Vector3 fakeStick = Vector3.zero;
 
-            // generate a fake stick input
-            if (input.magnitude > 0f)
-            {
-                if (input.x > 0)
-                    // emulate stick input that point 90deg to the right of the mole
-                    fakeStick = new Vector3(-transform.position.normalized.y, transform.position.normalized.x);
-                else
-                    fakeStick = new Vector3(transform.position.normalized.y, -transform.position.normalized.x);
-            }
-            
-            if(fakeStick.magnitude > 0.0f)
-                ApplyForce(CalculateMovementForce(fakeStick.normalized));
+            if (kbInput.x > 0)
+                // emulate stick input that points 90deg to the right of the mole
+                fakeStick = new Vector3(-transform.position.normalized.y, transform.position.normalized.x);
+            else
+                fakeStick = new Vector3(transform.position.normalized.y, -transform.position.normalized.x);
+                        
+            force = CalculateMovementForce(fakeStick);
 
-        }     
+        }
+
+        ApplyForce(force);
 
         transform.rotation = Quaternion.Euler(0f, 0f, GetAngle());
 
