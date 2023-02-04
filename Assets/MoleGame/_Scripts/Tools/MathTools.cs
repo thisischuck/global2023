@@ -648,5 +648,24 @@ public static class MathTools
         direction.z = 0f;
         return direction;
     }
+
+    /// <summary>
+    /// Maps angles that range from 0 to 180 or 0 to -180, to 0 to 360.
+    /// </summary>
+    /// <param name="angle"></param>
+    /// <param name="offset">The offset moves the angle origin. The function assumes Vector3.right angle as zero.</param>
+    /// <returns>A value between 0 to 360</returns>
+    public static float To360(float angle = 0, float offset = -90f)
+    {
+        float result = angle + offset;
+
+        if (result < 0)
+        {
+            result = 180f - Mathf.Abs(result) + 180f;
+        }
+
+        return result;
+    }
+
     #endregion
 }
