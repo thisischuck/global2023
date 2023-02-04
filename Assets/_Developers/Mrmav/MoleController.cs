@@ -21,6 +21,9 @@ public class MoleController : MonoBehaviour
     public float SlideForce = 2.0f;
 
 
+    private Vector3 _slideVelocity = Vector3.zero;
+
+
     void OnEnable()
     {
         MovementInputAction.Enable();
@@ -49,10 +52,13 @@ public class MoleController : MonoBehaviour
         Vector2 kbInput = MovementInputAction.ReadValue<Vector2>();
         Vector3 force = Vector3.zero;
 
+        bool thereWasInput = false;
+
         if (stickValues.magnitude > 0f)
         {
             // joystick
             force = CalculateMovementForce(stickValues);
+            thereWasInput = true;
 
         } else if (kbInput.magnitude > 0f)
         {
@@ -69,10 +75,17 @@ public class MoleController : MonoBehaviour
                         
             force = CalculateMovementForce(fakeStick);
 
+            thereWasInput = true;
+
         }
 
         ApplyForce(force);
-        ApplyForce(Vector3.down * SlideForce);
+
+        if(!thereWasInput)
+        {
+            ApplyForce(Vector3.down * SlideForce * Time.deltaTime);
+            Debug.DrawLine(transform.position, transform.position + Vector3.down * SlideForce, Color.magenta);
+        }
 
         transform.rotation = Quaternion.Euler(0f, 0f, GetAngle());
 
