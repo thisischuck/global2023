@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9043d40ed16ef6409559681307ce5ea, type: 3}
+  m_Name: Wave_Example
+  m_EditorClassIdentifier: 
+  _name: Fancy Example Name
+  _description: 
+  _preWaveItems:
+  - {fileID: 11400000, guid: eeede354e56f54141864dcb3423b93ae, type: 2}
+  - {fileID: 11400000, guid: 22753ae609b627c42ba25be32484d7a9, type: 2}
+  _restDuration: 9
+  _breaches:
+  - {fileID: 11400000, guid: fd1821ba1c6767b40831e670b067eb8a, type: 2}
+  _duration: 30
