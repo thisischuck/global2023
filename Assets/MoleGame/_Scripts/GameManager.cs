@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private GameMode _currentGameMode;
+    private WaveManager _waveManager;
     #region Singleton
     private static GameManager _instance;
     public static GameManager Instance 
@@ -18,8 +20,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake() => _instance = this;
     #endregion
-    private GameMode _currentGameMode;
-    
+
+
+    private void Start()
+    {
+        _waveManager = GetComponentInChildren<WaveManager>();
+        _waveManager.StartNextWave();
+    }
     public void ChangeGameMode(GameMode newGameMode) 
     {
         _currentGameMode = newGameMode;
