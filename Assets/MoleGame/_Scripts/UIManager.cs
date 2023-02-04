@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -19,16 +20,43 @@ public class UIManager : MonoBehaviour
     private void Awake() => _instance = this;
     #endregion
 
+    [SerializeField] Image _warningCircle;
     [SerializeField] TMP_Text _timer;
-    [SerializeField] bool _isDisplayingTimer;
-    public string TimerTxt { get => _timer.text; set => _timer.text = value; }
+     private bool _isDisplayingTimer;
     private float _t;
+    public string TimerTxt { get => _timer.text; set => _timer.text = value; }
 
+
+    private void Start()
+    {
+        DisableBreachWarning();
+    }
+    
     public void StartTimer(float timerDuration)
     {
         if(_isDisplayingTimer) return;
         _t = timerDuration;
         _isDisplayingTimer = true;
+    }
+
+
+    public void EnableBreachWarning(RangedFloat angleOfAttack)
+    {
+        _warningCircle.enabled = true;
+    }
+    
+    [ContextMenu("Breach Warning")]
+    public void DisableBreachWarning()
+    {
+
+        _warningCircle.enabled = false;
+    }
+
+
+    [ContextMenu("Open Store")]
+    public void OpenStore()
+    {
+
     }
 
     /// <summary>
@@ -54,4 +82,5 @@ public class UIManager : MonoBehaviour
            
         }
     }
+
 }
