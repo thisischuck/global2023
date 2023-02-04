@@ -713,6 +713,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1973685800 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5710463493863462890, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+  m_PrefabInstance: {fileID: 547027775}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7059217683767039760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -720,9 +725,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1260724414, guid: 2776e7d7fb956b7448ffdfa1618ec1fc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1973685800}
     - target: {fileID: 7059217685387560347, guid: 2776e7d7fb956b7448ffdfa1618ec1fc, type: 3}
       propertyPath: m_Name
-      value: CanvasStore
+      value: CanvasStore(And Touch)
       objectReference: {fileID: 0}
     - target: {fileID: 7059217685387560350, guid: 2776e7d7fb956b7448ffdfa1618ec1fc, type: 3}
       propertyPath: m_Camera
