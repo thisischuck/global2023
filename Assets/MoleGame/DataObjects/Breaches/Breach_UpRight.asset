@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ea60a6c2b207a4409d655ac72fd9f15, type: 3}
-  m_Name: Breach_Example
+  m_Script: {fileID: 11500000, guid: 31cef8f8d8b10ce41b9f8fe880771f3a, type: 3}
+  m_Name: Breach_UpRight
   m_EditorClassIdentifier: 
-  _name: Fancy Example Name
+  _name: 
   _description: 
-  _roots:
-  - {fileID: 11400000, guid: 8af03f5e87a08634f9fb70d7d41595ae, type: 2}
+  _roots: []
   _angleOfAttack:
-    minValue: 1
-    maxValue: 1
-  _timeOfAttack: 1
+    minValue: 0
+    maxValue: 47.337234
+  _firstAttackWarningDuration: 0.5
