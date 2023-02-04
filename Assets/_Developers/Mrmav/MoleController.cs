@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class MoleController : MonoBehaviour
 {
-
     public InputAction MovementInputAction;
     public InputAction MovementStickAction;
     public InputAction InteractInputAction;
@@ -23,6 +22,10 @@ public class MoleController : MonoBehaviour
 
     private SpriteRenderer _sprite = null;
     private Vector3 _slideVelocity = Vector3.zero;
+    private Animator _animator;
+
+    private float speed;
+    private Vector3 oldPosition;
 
 
     void OnEnable()
@@ -42,10 +45,11 @@ public class MoleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _animator = this.GetComponent<Animator>();
         _sprite = RenderElement.GetComponent<SpriteRenderer>();
 
         ApplyForce(new Vector3(0.0f, -1.0f, 0.0f));
+        oldPosition = this.transform.position;
     }
 
     // Update is called once per frame
@@ -64,7 +68,8 @@ public class MoleController : MonoBehaviour
             force = CalculateMovementForce(stickValues);
             thereWasInput = true;
 
-        } else if (kbInput.magnitude > 0f)
+        }
+        else if (kbInput.magnitude > 0.01f)
         {
             // kb input
             // generate a fake stick input
@@ -76,45 +81,54 @@ public class MoleController : MonoBehaviour
                 fakeStick = new Vector3(-transform.position.normalized.y, transform.position.normalized.x);
             else
                 fakeStick = new Vector3(transform.position.normalized.y, -transform.position.normalized.x);
-                        
+
             force = CalculateMovementForce(fakeStick);
 
             thereWasInput = true;
 
         }
 
+        _animator.SetBool("Walking", force.magnitude > 0);
         ApplyForce(force);
 
-        if(!thereWasInput)
+        if (!thereWasInput)
         {
             ApplyForce(Vector3.down * SlideForce * Time.deltaTime);
+            if (CalculateSpeed() > 0.01f)
+            {
+                _animator.SetBool("Sliding", true);
+            }
+            else
+            {
+                _animator.SetBool("Sliding", false);
+            }
             Debug.DrawLine(transform.position, transform.position + Vector3.down * SlideForce, Color.magenta);
         }
+        else _animator.SetBool("Sliding", false);
 
-        RenderElement.transform.rotation = Quaternion.Euler(0f, 0f, GetAngle());
+
+
+        RenderElement.transform.rotation = Quaternion.Euler(0f, 0f, GetAngle() + 90);
 
         // determine which side the force was applied at
         // and flip de sprite if needed
         Vector3 right = Vector3.Cross(transform.position.normalized, Vector3.forward);
         float dot = Vector3.Dot(force.normalized, right.normalized);
         if (dot > 0)
-            _sprite.flipY = true;
+            _sprite.flipX = true;
         else if (dot < 0)
-            _sprite.flipY = false;
+            _sprite.flipX = false;
         // if 0, just leave it
-            
-
         //Debug.Log("Angle: " + GetAngle() + "___ To360: " + (360f - MathTools.To360(GetAngle())));
-
+        oldPosition = this.transform.position;
     }
 
     public Vector3 CalculateMovementForce(Vector3 input)
     {
-        
         // calculates the inbetween vector
         // this is used to get the mirror plane
         Vector3 side = Vector3.Lerp(transform.position.normalized, input.normalized, 0.5f);
-        
+
         // the direction is a vector point towrds the desired destination
         Vector3 direction = side.normalized - transform.position.normalized;
 
@@ -135,10 +149,13 @@ public class MoleController : MonoBehaviour
     public void ApplyForce(Vector3 force)
     {
         transform.position = (transform.position.normalized + force) * Radius;
-        
     }
 
-
+    public float CalculateSpeed()
+    {
+        float mag = (oldPosition - this.transform.position).magnitude;
+        return mag;
+    }
     // Returns the angle at which the controller is.
     // this is a value between 0 to 180 or 0 to -180.
     //    -90 is up
@@ -147,7 +164,7 @@ public class MoleController : MonoBehaviour
     // (-)180 is left
     public float GetAngle()
     {
-        float angle = Vector3.Angle(transform.position, Vector3.right);        
+        float angle = Vector3.Angle(transform.position, Vector3.right);
         if (transform.position.y < 0)
         {
             angle = -angle;
