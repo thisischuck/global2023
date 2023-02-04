@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Fancy Example Names
   _description: 
+  _storeIcon: {fileID: 21300000, guid: 1bb69cd91685d9248a58b144052746f3, type: 3}
