@@ -99,8 +99,9 @@ public class MoleController : MonoBehaviour
         float dot = Vector3.Dot(force.normalized, right.normalized);
         if (dot > 0)
             _sprite.flipY = true;
-        else
+        else if (dot < 0)
             _sprite.flipY = false;
+        // if 0, just leave it
             
 
         //Debug.Log("Angle: " + GetAngle() + "___ To360: " + (360f - MathTools.To360(GetAngle())));
