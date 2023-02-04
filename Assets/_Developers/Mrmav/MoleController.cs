@@ -17,6 +17,13 @@ public class MoleController : MonoBehaviour
     // the amout of follow direction when using the stick
     public float StickInputSize = 3f;
 
+    // the slide effect of the mole
+    public float SlideForce = 2.0f;
+
+
+    private SpriteRenderer _sprite = null;
+    private Vector3 _slideVelocity = Vector3.zero;
+
 
     void OnEnable()
     {
@@ -35,6 +42,9 @@ public class MoleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        _sprite = RenderElement.GetComponent<SpriteRenderer>();
+
         ApplyForce(new Vector3(0.0f, -1.0f, 0.0f));
     }
 
@@ -46,10 +56,13 @@ public class MoleController : MonoBehaviour
         Vector2 kbInput = MovementInputAction.ReadValue<Vector2>();
         Vector3 force = Vector3.zero;
 
+        bool thereWasInput = false;
+
         if (stickValues.magnitude > 0f)
         {
             // joystick
             force = CalculateMovementForce(stickValues);
+            thereWasInput = true;
 
         } else if (kbInput.magnitude > 0f)
         {
@@ -66,13 +79,32 @@ public class MoleController : MonoBehaviour
                         
             force = CalculateMovementForce(fakeStick);
 
+            thereWasInput = true;
+
         }
 
         ApplyForce(force);
 
-        transform.rotation = Quaternion.Euler(0f, 0f, GetAngle());
+        if(!thereWasInput)
+        {
+            ApplyForce(Vector3.down * SlideForce * Time.deltaTime);
+            Debug.DrawLine(transform.position, transform.position + Vector3.down * SlideForce, Color.magenta);
+        }
 
-        Debug.Log("Angle: " + GetAngle() + "___ To360: " + (360f - MathTools.To360(GetAngle())));
+        RenderElement.transform.rotation = Quaternion.Euler(0f, 0f, GetAngle());
+
+        // determine which side the force was applied at
+        // and flip de sprite if needed
+        Vector3 right = Vector3.Cross(transform.position.normalized, Vector3.forward);
+        float dot = Vector3.Dot(force.normalized, right.normalized);
+        if (dot > 0)
+            _sprite.flipY = true;
+        else if (dot < 0)
+            _sprite.flipY = false;
+        // if 0, just leave it
+            
+
+        //Debug.Log("Angle: " + GetAngle() + "___ To360: " + (360f - MathTools.To360(GetAngle())));
 
     }
 
