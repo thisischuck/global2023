@@ -67,8 +67,16 @@ public class WaveManager : MonoBehaviour
     {
         GameManager.Instance.ChangeGameMode(GameManager.GameMode.Shop);
         
+        if(waveData.IsThereItemsOnWave())
+            UIManager.Instance.OpenStore(waveData.PreWaveItems);
+        
         UIManager.Instance.StartTimer(waveData.RestDuration);
         yield return Yielders.Get(waveData.RestDuration);
+        
+        if(waveData.IsThereItemsOnWave())
+            UIManager.Instance.CloseStore();
+        
+        yield return Yielders.Get(.5f);
     }
 
 
