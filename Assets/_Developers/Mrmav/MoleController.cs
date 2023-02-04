@@ -14,15 +14,9 @@ public class MoleController : MonoBehaviour
 
     public float Radius = 60.0f;
 
-    public float ThetaIncrement = 1.0f;
-
     // the amout of follow direction when using the stick
-    public float StickInputSize = 0.8f;
+    public float StickInputSize = 3f;
 
-    [SerializeField]
-    private float _currentTheta = 0.0f;
-
-    private float _pi2 = Mathf.PI * 2;
 
     void OnEnable()
     {
@@ -41,7 +35,7 @@ public class MoleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        ApplyForce(new Vector3(0.0f, -1.0f, 0.0f));
     }
 
     // Update is called once per frame
@@ -49,56 +43,74 @@ public class MoleController : MonoBehaviour
     {
 
         Vector2 stickValues = MovementStickAction.ReadValue<Vector2>();
-        // Debug.Log("stick values " + stickValues);
-
-        float interact = InteractInputAction.ReadValue<float>();
-        // Debug.Log("Interact " + interact);
+        Vector2 kbInput = MovementInputAction.ReadValue<Vector2>();
+        Vector3 force = Vector3.zero;
 
         if (stickValues.magnitude > 0f)
         {
+            // joystick
+            force = CalculateMovementForce(stickValues);
 
-            Vector3 side = Vector3.Lerp(transform.position.normalized, stickValues.normalized, 0.5f);
-            
-            Vector3 direction = side.normalized - transform.position.normalized;
-
-            direction = direction * StickInputSize;
-            Vector3 newPosition = transform.position.normalized + direction;
-
-            transform.position = newPosition * Radius;
-
-            float _angle = Vector3.Angle(transform.position, Vector3.right); 
-            if (transform.position.y < 0)
-                {
-                    _angle = -_angle;
-                }
-
-            _currentTheta = _angle * Mathf.Deg2Rad;
-
-            Debug.DrawLine(Vector3.zero, side * Radius, Color.blue);
-            Debug.DrawLine(Vector3.zero, stickValues, Color.red);
-            Debug.DrawLine(Vector3.zero, transform.position, Color.green);
-
-        } else
+        } else if (kbInput.magnitude > 0f)
         {
+            // kb input
+            // generate a fake stick input
 
-            Vector2 input = MovementInputAction.ReadValue<Vector2>();
-            _currentTheta += ThetaIncrement * input.x * Time.deltaTime;
+            Vector3 fakeStick = Vector3.zero;
 
-            transform.position = new Vector3(Mathf.Cos(_currentTheta) * Radius, Mathf.Sin(_currentTheta) * Radius, 0f);
+            if (kbInput.x > 0)
+                // emulate stick input that points 90deg to the right of the mole
+                fakeStick = new Vector3(-transform.position.normalized.y, transform.position.normalized.x);
+            else
+                fakeStick = new Vector3(transform.position.normalized.y, -transform.position.normalized.x);
+                        
+            force = CalculateMovementForce(fakeStick);
 
-        }     
-
-        float angle = Vector3.Angle(transform.position, Vector3.right);        
-        if (transform.position.y < 0)
-        {
-            angle = -angle;
         }
-        
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+        ApplyForce(force);
+
+        transform.rotation = Quaternion.Euler(0f, 0f, GetAngle());
 
     }
 
+    public Vector3 CalculateMovementForce(Vector3 input)
+    {
+        
+        // calculates the inbetween vector
+        // this is used to get the mirror plane
+        Vector3 side = Vector3.Lerp(transform.position.normalized, input.normalized, 0.5f);
+        
+        // the direction is a vector point towrds the desired destination
+        Vector3 direction = side.normalized - transform.position.normalized;
 
+        // scale up the direction and delta
+        Vector3 force = direction * StickInputSize * Time.deltaTime;
+
+
+        Debug.DrawLine(Vector3.zero, side * Radius, Color.blue);
+        Debug.DrawLine(Vector3.zero, input * Radius, Color.yellow);
+        Debug.DrawLine(transform.position, transform.position + direction * 4.0f, Color.red);
+        Debug.DrawLine(Vector3.zero, transform.position, Color.green);
+
+        return force;
+
+
+    }
+
+    public void ApplyForce(Vector3 force)
+    {
+        transform.position = (transform.position.normalized + force) * Radius;
+        
+    }
+
+
+    // Returns the angle at which the controller is.
+    // this is a value between 0 to 180 or 0 to -180.
+    //    -90 is up
+    //     90 is down
+    //      0 is right
+    // (-)180 is left
     public float GetAngle()
     {
         float angle = Vector3.Angle(transform.position, Vector3.right);        

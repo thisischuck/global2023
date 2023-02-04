@@ -147,7 +147,7 @@ MonoBehaviour:
   RenderElement: {fileID: 6598910987056068619}
   Radius: 2.5
   ThetaIncrement: 4
-  StickInputSize: 0.01
+  StickInputSize: 3
   _currentTheta: 0
 --- !u!1 &6598910987056068619
 GameObject:
