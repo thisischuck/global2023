@@ -11,7 +11,7 @@ public class Wave : DescriptionBasedSO
     
     [Header("Defense")]
     [SerializeField] List<Breach> _breaches;
-    [SerializeField] float _duration = 20f;
+
 
     public bool IsThereItemsOnWave() 
     {
@@ -20,10 +20,28 @@ public class Wave : DescriptionBasedSO
     }
 
     
-
     public List<Item> PreWaveItems { get => _preWaveItems;}
     public float RestDuration { get => _restDuration;  }
     public List<Breach> Breaches { get => _breaches;  }
-    public float Duration { get => _duration;  }
+    public float Duration 
+    { 
+        get 
+        {
+            var duration = 0f;
+            foreach (var item in _breaches)
+                duration += item.attackDelay;
+            return duration;
+        }  
+    }
 }
+
+    [System.Serializable]
+    public class Breach
+    {
+        [SerializeField] BreachData _breachData;
+        [SerializeField] [Range(0f, 5f)] float _attackDelay;
+
+        public float attackDelay { get => _attackDelay; }
+        public BreachData BreachData { get => _breachData;  }
+    }
 

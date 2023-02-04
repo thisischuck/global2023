@@ -5,14 +5,16 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] List<Wave> _waves;
-    private IEnumerator<Wave> _iterator;
+    private IEnumerator<Wave> _waveIterator;
+    private IEnumerator<Breach> _breachIterator;
     private Wave _currentWave;
+
 
     public Wave CurrentWave { get => _currentWave;  }
 
     private void Start()
     {
-        _iterator = _waves.GetEnumerator();
+        _waveIterator = _waves.GetEnumerator();
         //StartNextWave();
     }
     
@@ -20,11 +22,10 @@ public class WaveManager : MonoBehaviour
     private void StartNextWave()
     {
         StopAllCoroutines();
-        
-        if (_iterator.MoveNext())
+
+        if (_waveIterator.MoveNext())
         {
-            _currentWave= _iterator.Current;
-            Debug.Log(_currentWave.name + " is current wave.");
+            _currentWave= _waveIterator.Current;
         }
         else
         {
@@ -40,8 +41,25 @@ public class WaveManager : MonoBehaviour
     private IEnumerator COR_Wave(Wave waveData)
     {   
         yield return StartCoroutine(COR_Rest(waveData));
-        
-        yield return Yielders.Get(waveData.Duration);
+
+        Debug.Log("Wave Started! Duration: " + waveData.Duration);
+        _breachIterator = waveData.Breaches.GetEnumerator();
+
+        UIManager.Instance.EnableBreachWarning(waveData.Breaches[0].BreachData.AngleOfAttack);
+        yield return Yielders.Get(waveData.Breaches[0].BreachData.FirstAttackWarningDuration);
+        UIManager.Instance.DisableBreachWarning();
+
+        while (_breachIterator.MoveNext())
+        {
+            var breach = _breachIterator.Current;
+            yield return Yielders.Get(breach.attackDelay);
+
+            // RootSystem.Add(breach.BreachData.Roots,breach.BreachData.AngleOfAttack)
+            Debug.Log("Started Breach: " + breach.BreachData.name);
+            // WIP For each root, root system .add Root
+        }
+
+        Debug.Log("Wave Completed!");
         StartNextWave();
     }
 
