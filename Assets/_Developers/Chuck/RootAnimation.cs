@@ -22,14 +22,6 @@ public class RootAnimation : MonoBehaviour
         StartCoroutine(Frame());
     }
 
-    Vector2 rotateAngle(float Angle, Vector2 dir)
-    {
-        return new Vector2(
-                dir.x * Mathf.Cos(Angle) - dir.y * Mathf.Sin(Angle),
-                dir.x * Mathf.Sin(Angle) + dir.y * Mathf.Cos(Angle)
-        );
-    }
-
     IEnumerator Frame()
     {
         while (true)
@@ -40,7 +32,7 @@ public class RootAnimation : MonoBehaviour
             Vector2 dir = targetPosition - currentPosition;
             //dir = dir.normalized * 0.3f + currentDirection * 0.7f;
 
-            Vector2 dirRotated = rotateAngle(Mathf.Deg2Rad * angleCelcius, dir.normalized);
+            Vector2 dirRotated = MathTools.RotateVector2(dir.normalized, angleCelcius);
             Vector2 newPosition = currentPosition + dirRotated * rootData.Speed;
             currentDirection = dirRotated;
             currentPosition = newPosition;

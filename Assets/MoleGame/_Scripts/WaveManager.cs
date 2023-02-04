@@ -8,16 +8,18 @@ public class WaveManager : MonoBehaviour
     private IEnumerator<Wave> _waveIterator;
     private IEnumerator<Breach> _breachIterator;
     private Wave _currentWave;
+    public RootSystem _rootSystem;
 
 
-    public Wave CurrentWave { get => _currentWave;  }
+
+    public Wave CurrentWave { get => _currentWave; }
 
     private void Start()
     {
         _waveIterator = _waves.GetEnumerator();
         //StartNextWave();
     }
-    
+
     [ContextMenu("Start Next Wave")]
     private void StartNextWave()
     {
@@ -25,7 +27,7 @@ public class WaveManager : MonoBehaviour
 
         if (_waveIterator.MoveNext())
         {
-            _currentWave= _waveIterator.Current;
+            _currentWave = _waveIterator.Current;
         }
         else
         {
@@ -33,13 +35,13 @@ public class WaveManager : MonoBehaviour
             GameManager.Instance.Win();
             return;
         }
-        
-        StartCoroutine(COR_Wave(_currentWave));    
+
+        StartCoroutine(COR_Wave(_currentWave));
     }
 
 
     private IEnumerator COR_Wave(Wave waveData)
-    {   
+    {
         yield return StartCoroutine(COR_Rest(waveData));
 
         Debug.Log("Wave Started! Duration: " + waveData.Duration);
@@ -53,9 +55,13 @@ public class WaveManager : MonoBehaviour
         {
             var breach = _breachIterator.Current;
             yield return Yielders.Get(breach.attackDelay);
-
-            // RootSystem.Add(breach.BreachData.Roots,breach.BreachData.AngleOfAttack)
             Debug.Log("Started Breach: " + breach.BreachData.name);
+
+            foreach (var item in breach.BreachData.Roots)
+            {
+                _rootSystem.CreateRoot(item, breach.BreachData.AngleOfAttack);
+            }
+            // RootSystem.Add(breach.BreachData.Roots,breach.BreachData.AngleOfAttack)
             // WIP For each root, root system .add Root
         }
 
@@ -66,10 +72,9 @@ public class WaveManager : MonoBehaviour
     private IEnumerator COR_Rest(Wave waveData)
     {
         GameManager.Instance.ChangeGameMode(GameManager.GameMode.Shop);
-        
+
         UIManager.Instance.StartTimer(waveData.RestDuration);
         yield return Yielders.Get(waveData.RestDuration);
     }
-
 
 }
