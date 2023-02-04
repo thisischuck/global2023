@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5f07531de3fa9e4291838f3732684ce, type: 3}
-  m_Name: Root_Example
+  m_Name: Carrot
   m_EditorClassIdentifier: 
-  _name: 
+  _name: Carrot
   _description: 
-  _type: 0
+  _type: 2
   _hp: 0
   _speed: 0
-  _weaknesses: 
+  _growthRate: 0
+  _coneAngle:
+    minValue: -30.51183
+    maxValue: 30.522953
+  _weaknesses: 00000000

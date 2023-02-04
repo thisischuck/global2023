@@ -667,5 +667,16 @@ public static class MathTools
         return 360.0f - result;
     }
 
+    /// <summary>
+    /// Gets the world position from the edge of a circle given it's center, the radius and an angle (in celsius)
+    /// </summary>
+    /// <param name="angleInCelsius"></param>
+    /// <param name="Radius"></param>
+    /// <param name="Center"></param>
+    public static Vector2 PosInCircleEdge(float angleInCelsius, float Radius, Vector2 Center)
+    {
+        //negative to acomodate our "clock" position
+        return Center + RotateVector2(Vector2.up * Radius, -angleInCelsius);
+    }
     #endregion
 }

@@ -8,7 +8,7 @@ public class Root : DescriptionBasedSO
     [SerializeField] int _hp;
     [SerializeField] float _speed;
     [SerializeField] float _growthRate;
-    [SerializeField] float _coneAngle; //celcius
+    [SerializeField][MinMaxRange(-90, 90)] float _coneAngle; //celcius
     [SerializeField] List<DamageTypes> _weaknesses;
 
     public RootType Type { get => _type; }

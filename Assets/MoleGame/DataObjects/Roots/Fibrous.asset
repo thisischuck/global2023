@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31cef8f8d8b10ce41b9f8fe880771f3a, type: 3}
-  m_Name: Breach_Down
+  m_Script: {fileID: 11500000, guid: e5f07531de3fa9e4291838f3732684ce, type: 3}
+  m_Name: Fibrous
   m_EditorClassIdentifier: 
-  _name: 
+  _name: Fibrous
   _description: 
-  _roots:
-  - {fileID: 11400000, guid: 8af03f5e87a08634f9fb70d7d41595ae, type: 2}
-  _angleOfAttack:
-    minValue: 121.61215
-    maxValue: 207.2958
-  _firstAttackWarningDuration: 0.5
+  _type: 1
+  _hp: 0
+  _speed: 0
+  _growthRate: 0
+  _coneAngle: 30
+  _weaknesses: 0200000001000000
