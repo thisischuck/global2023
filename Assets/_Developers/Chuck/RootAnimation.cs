@@ -17,21 +17,20 @@ public class RootAnimation : MonoBehaviour
     {
         currentPosition = this.transform.localPosition;
         r = this.GetComponent<LineRenderer>();
-        targetPosition = this.transform.InverseTransformPoint(targetPosition);
+        //targetPosition = this.transform.InverseTransformPoint(targetPosition);
         currentDirection = (targetPosition - currentDirection).normalized;
         StartCoroutine(Frame());
     }
 
     IEnumerator Frame()
     {
-        while (true)
+        while (Vector2.Distance(targetPosition, currentPosition) > 3f)
         {
             //get a new position randomly withing the new threshold cone.
             //chose an angle to go towards;
             float angleCelcius = Random.Range(-rootData.ConeAngle, rootData.ConeAngle);
             Vector2 dir = targetPosition - currentPosition;
             //dir = dir.normalized * 0.3f + currentDirection * 0.7f;
-
             Vector2 dirRotated = MathTools.RotateVector2(dir.normalized, angleCelcius);
             Vector2 newPosition = currentPosition + dirRotated * rootData.Speed;
             currentDirection = dirRotated;
@@ -43,5 +42,7 @@ public class RootAnimation : MonoBehaviour
             yield return new WaitForSecondsRealtime(rootData.GrowthRate);
             //cry
         }
+        Debug.Log("Stopped");
+        //Apply Vanish Maybe
     }
 }
