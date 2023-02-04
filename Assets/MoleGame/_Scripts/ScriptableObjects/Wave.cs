@@ -15,7 +15,7 @@ public class Wave : DescriptionBasedSO
 
     public bool IsThereItemsOnWave() 
     {
-        if(_preWaveItems.Count < 1) return false;
+        if(_preWaveItems.Count == 0) return false;
         return true;
     }
 

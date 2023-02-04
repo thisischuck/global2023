@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     private void Awake() => _instance = this;
     #endregion
 
+    [SerializeField] StoreManager _store;
     [SerializeField] Image _warningCircle;
     [SerializeField] TMP_Text _timer;
      private bool _isDisplayingTimer;
@@ -31,7 +32,7 @@ public class UIManager : MonoBehaviour
     {
         DisableBreachWarning();
     }
-    
+
     public void StartTimer(float timerDuration)
     {
         if(_isDisplayingTimer) return;
@@ -48,15 +49,22 @@ public class UIManager : MonoBehaviour
     [ContextMenu("Breach Warning")]
     public void DisableBreachWarning()
     {
-
         _warningCircle.enabled = false;
     }
 
 
     [ContextMenu("Open Store")]
-    public void OpenStore()
+    public void OpenStore(List<Item> stock)
     {
+        _store.UpdateAvailableStock(stock);
+        _store.ShowStore();
+    }
 
+    [ContextMenu("Close Store")]
+    public void CloseStore()
+    {
+        _store.UpdateAvailableStock(null);
+        _store.HideStore();
     }
 
     /// <summary>
@@ -76,10 +84,6 @@ public class UIManager : MonoBehaviour
                 _timer.enabled = false;
             }
             TimerTxt = Mathf.Round(_t).ToString();
-        }
-        else
-        {
-           
         }
     }
 
