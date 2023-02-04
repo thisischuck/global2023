@@ -17,6 +17,9 @@ public class MoleController : MonoBehaviour
     // the amout of follow direction when using the stick
     public float StickInputSize = 3f;
 
+    // the slide effect of the mole
+    public float SlideForce = 2.0f;
+
 
     void OnEnable()
     {
@@ -69,10 +72,11 @@ public class MoleController : MonoBehaviour
         }
 
         ApplyForce(force);
+        ApplyForce(Vector3.down * SlideForce);
 
         transform.rotation = Quaternion.Euler(0f, 0f, GetAngle());
 
-        Debug.Log("Angle: " + GetAngle() + "___ To360: " + (360f - MathTools.To360(GetAngle())));
+        //Debug.Log("Angle: " + GetAngle() + "___ To360: " + (360f - MathTools.To360(GetAngle())));
 
     }
 
