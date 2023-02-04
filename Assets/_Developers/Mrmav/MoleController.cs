@@ -21,6 +21,7 @@ public class MoleController : MonoBehaviour
     public float SlideForce = 2.0f;
 
 
+    private SpriteRenderer _sprite = null;
     private Vector3 _slideVelocity = Vector3.zero;
 
 
@@ -41,6 +42,9 @@ public class MoleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        _sprite = RenderElement.GetComponent<SpriteRenderer>();
+
         ApplyForce(new Vector3(0.0f, -1.0f, 0.0f));
     }
 
@@ -87,7 +91,17 @@ public class MoleController : MonoBehaviour
             Debug.DrawLine(transform.position, transform.position + Vector3.down * SlideForce, Color.magenta);
         }
 
-        transform.rotation = Quaternion.Euler(0f, 0f, GetAngle());
+        RenderElement.transform.rotation = Quaternion.Euler(0f, 0f, GetAngle());
+
+        // determine which side the force was applied at
+        // and flip de sprite if needed
+        Vector3 right = Vector3.Cross(transform.position.normalized, Vector3.forward);
+        float dot = Vector3.Dot(force.normalized, right.normalized);
+        if (dot > 0)
+            _sprite.flipY = true;
+        else
+            _sprite.flipY = false;
+            
 
         //Debug.Log("Angle: " + GetAngle() + "___ To360: " + (360f - MathTools.To360(GetAngle())));
 
