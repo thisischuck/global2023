@@ -239,18 +239,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 831515177098240826, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 831515177098240826, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 831515177098240826, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
     - target: {fileID: 3254697315700309533, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -295,37 +283,73 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4607618145537084895, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4607618145537084895, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
-      propertyPath: m_FlipY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4607618145537084895, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 94675a28d528048059c8fbb6a05286a7, type: 3}
     - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
-      propertyPath: RenderElement
-      value: 
-      objectReference: {fileID: 1910919126}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[6].m_Id
+      value: 219c52dc-2a1d-4d76-904e-a4739c880de0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[7].m_Id
+      value: 5931d1d2-bece-4ba2-a80b-861902356cb2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[8].m_Id
+      value: a9783f6a-3f0b-441e-8848-115264bc1ae4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[6].m_Name
+      value: Arrows
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[6].m_Path
+      value: 2DVector
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[7].m_Name
+      value: left
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[7].m_Path
+      value: <Keyboard>/leftArrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[8].m_Name
+      value: right
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[8].m_Path
+      value: <Keyboard>/rightArrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[6].m_Flags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[7].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[8].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[6].m_Action
+      value: Movement Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[7].m_Action
+      value: Movement Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: MovementInputAction.m_SingletonActionBindings.Array.data[8].m_Action
+      value: Movement Input
+      objectReference: {fileID: 0}
     - target: {fileID: 5710463493863462890, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
       propertyPath: m_Name
       value: MoleController
-      objectReference: {fileID: 0}
-    - target: {fileID: 8230255408800526077, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8230255408800526077, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8230255408800526077, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
@@ -753,11 +777,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1910919126 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6598910987056068619, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+--- !u!114 &2105061203 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
   m_PrefabInstance: {fileID: 547027775}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6df9ec65e082b641bc317788b42901f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7059217683767039760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -765,10 +795,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1260724414, guid: 2776e7d7fb956b7448ffdfa1618ec1fc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    - target: {fileID: 1936068233, guid: 2776e7d7fb956b7448ffdfa1618ec1fc, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1973685800}
+      objectReference: {fileID: 2105061203}
+    - target: {fileID: 1936068233, guid: 2776e7d7fb956b7448ffdfa1618ec1fc, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2105061203}
+    - target: {fileID: 6380593739532114783, guid: 2776e7d7fb956b7448ffdfa1618ec1fc, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2105061203}
+    - target: {fileID: 6380593739532114783, guid: 2776e7d7fb956b7448ffdfa1618ec1fc, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2105061203}
     - target: {fileID: 7059217685387560347, guid: 2776e7d7fb956b7448ffdfa1618ec1fc, type: 3}
       propertyPath: m_Name
       value: CanvasStore(And Touch)

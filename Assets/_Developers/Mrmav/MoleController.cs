@@ -27,6 +27,8 @@ public class MoleController : MonoBehaviour
     private float speed;
     private Vector3 oldPosition;
 
+    private int _touchInput = 0;
+    public int TouchInput { get => _touchInput; set => _touchInput = value; }
 
     void OnEnable()
     {
@@ -42,6 +44,7 @@ public class MoleController : MonoBehaviour
         InteractInputAction.Disable();
     }
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +58,6 @@ public class MoleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         Vector2 stickValues = MovementStickAction.ReadValue<Vector2>();
         Vector2 kbInput = MovementInputAction.ReadValue<Vector2>();
         Vector3 force = Vector3.zero;
@@ -73,7 +75,6 @@ public class MoleController : MonoBehaviour
         {
             // kb input
             // generate a fake stick input
-
             Vector3 fakeStick = Vector3.zero;
 
             if (kbInput.x > 0)
@@ -87,6 +88,23 @@ public class MoleController : MonoBehaviour
             thereWasInput = true;
 
         }
+        else if (_touchInput != 0)
+        {
+            // kb input
+            // generate a fake stick input
+            Vector3 fakeStick = Vector3.zero;
+
+            if (_touchInput > 0)
+                // emulate stick input that points 90deg to the right of the mole
+                fakeStick = new Vector3(-transform.position.normalized.y, transform.position.normalized.x);
+            else
+                fakeStick = new Vector3(transform.position.normalized.y, -transform.position.normalized.x);
+
+            force = CalculateMovementForce(fakeStick);
+
+            thereWasInput = true;
+        }
+
 
         _animator.SetBool("Walking", force.magnitude > 0);
         ApplyForce(force);
