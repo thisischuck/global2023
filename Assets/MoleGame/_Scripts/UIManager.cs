@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     private void Awake() => _instance = this;
     #endregion
 
+    [SerializeField] StatsManager _statsManager;
     [SerializeField] StoreManager _store;
     [SerializeField] Image _warningCircle;
     [SerializeField] TMP_Text _timer;
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         DisableBreachWarning();
+        HideStats();
     }
 
     public void StartTimer(float timerDuration)
@@ -40,8 +42,19 @@ public class UIManager : MonoBehaviour
         _t = timerDuration;
         _isDisplayingTimer = true;
     }
+#region  Stats
+    public void DisplayStats()
+    {
+        var gameManager = GameManager.Instance;
+        _statsManager.UpdateStats(gameManager.RootsAnnihilated,gameManager.WavesConquered, gameManager.TimeFighting,gameManager.TimeSleeping);
+        _statsManager.gameObject.SetActive(true);
+    }
 
-
+    public void HideStats()
+    {
+        _statsManager.gameObject.SetActive(false);
+    }
+#endregion
     public void EnableBreachWarning(RangedFloat angleOfAttack)
     {
         _warningCircle.enabled = true;

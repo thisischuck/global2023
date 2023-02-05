@@ -26,6 +26,7 @@ public class RootSystem : MonoBehaviour
     {
         if(RootList.Contains(rootElement.gameObject))
         {
+            GameManager.Instance.RootsAnnihilated ++;
             RootList.Remove(rootElement.gameObject);
         }else
         {

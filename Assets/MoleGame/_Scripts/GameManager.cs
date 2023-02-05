@@ -4,22 +4,37 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+#region Components
     [SerializeField] MoleController _player;
-
-    public delegate void OnLoseDelegate();
-    public delegate void OnWinDelegate();
-    public delegate void OnGamePhaseDelegate(GamePhase mode);
-
-
-    public OnLoseDelegate OnLose;
-    public OnWinDelegate OnWin;
-    public OnGamePhaseDelegate OnGamePhase;
-
-
-    private GamePhase _currentGamePhase;
+    
     private WaveManager _waveManager;
     private BaseManager _baseManager;
     private RootSystem _rootSystem;
+#endregion
+
+#region Stats
+    private int _rootsAnnihilated = 0;
+    private int _wavesConquered = 0;
+    private int _timeFighting = 0;
+    private int _timeSleeping = 0;
+
+    public int RootsAnnihilated { get => _rootsAnnihilated; set => _rootsAnnihilated = value; }
+    public int WavesConquered { get => _wavesConquered; set => _wavesConquered = value; }
+    public int TimeFighting { get => _timeFighting; set => _timeFighting = value; }
+    public int TimeSleeping { get => _timeSleeping; set => _timeSleeping = value; }
+#endregion
+
+#region Delegates
+    public delegate void OnLoseDelegate();
+    public delegate void OnWinDelegate();
+    public delegate void OnGamePhaseDelegate(GamePhase mode);
+    public OnLoseDelegate OnLose;
+    public OnWinDelegate OnWin;
+    public OnGamePhaseDelegate OnGamePhase;
+#endregion
+
+    private GamePhase _currentGamePhase;
+    
 
     public WaveManager WaveManager { get => _waveManager;  }
     public RootSystem RootSystem { get => _rootSystem;  }
@@ -37,6 +52,7 @@ public class GameManager : MonoBehaviour
             return _instance;
         } 
     }
+
 
 
     private void Awake() => _instance = this;
@@ -63,7 +79,10 @@ public class GameManager : MonoBehaviour
 
         ChangeGamePhase(GamePhase.Defeat);
         Debug.Log("Loss requested!!!!!!!!!!");
+        UIManager.Instance.DisplayStats();
         OnLose();
+        
+        Time.timeScale = 0;
     }
 
     public void Win() 
@@ -72,7 +91,10 @@ public class GameManager : MonoBehaviour
 
         ChangeGamePhase(GamePhase.Victory);
         Debug.Log("Win requested !!!!!!!!!!!!");
+        UIManager.Instance.DisplayStats();
         OnWin();
+
+        Time.timeScale = 0;
     }
 
     public enum GamePhase

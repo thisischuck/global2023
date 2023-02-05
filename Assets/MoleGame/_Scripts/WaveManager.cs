@@ -42,7 +42,7 @@ public class WaveManager : MonoBehaviour
         yield return StartCoroutine(COR_Rest(waveData));
 
         GameManager.Instance.ChangeGamePhase(GameManager.GamePhase.Wave);
-        Debug.Log("Wave Started! Duration: " + waveData.Duration);
+        Debug.Log("Wave Started!" );
         _breachIterator = waveData.Breaches.GetEnumerator();
 
         UIManager.Instance.EnableBreachWarning(waveData.Breaches[0].BreachData.AngleOfAttack);
@@ -64,12 +64,14 @@ public class WaveManager : MonoBehaviour
         // Wait until there are no roots left to move to next Wave;
         yield return new WaitUntil(()=> _rootSystem.RootCount() <= 0);
         Debug.Log("Wave Completed!");
+
+        GameManager.Instance.TimeFighting += Mathf.RoundToInt(waveData.Duration);
+        GameManager.Instance.WavesConquered++;
         StartNextWave();
     }
 
     private IEnumerator COR_Rest(Wave waveData)
     {
-
         GameManager.Instance.ChangeGamePhase(GameManager.GamePhase.Shop);
 
         if (waveData.IsThereItemsOnWave())
@@ -77,6 +79,7 @@ public class WaveManager : MonoBehaviour
 
         UIManager.Instance.StartTimer(waveData.RestDuration);
         yield return Yielders.Get(waveData.RestDuration);
+        GameManager.Instance.TimeSleeping += Mathf.RoundToInt(waveData.RestDuration);
 
         if (waveData.IsThereItemsOnWave())
             UIManager.Instance.CloseStore();
