@@ -18,7 +18,7 @@ public class BackgroundEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Mole = GameManager.Instance.Player;
     }
 
     void LateUpdate()
