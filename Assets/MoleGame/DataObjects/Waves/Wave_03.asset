@@ -17,7 +17,7 @@ MonoBehaviour:
   _preWaveItems:
   - {fileID: 11400000, guid: eeede354e56f54141864dcb3423b93ae, type: 2}
   - {fileID: 11400000, guid: 22753ae609b627c42ba25be32484d7a9, type: 2}
-  _restDuration: 6
+  _restDuration: 9
   _breaches:
   - _breachData: {fileID: 11400000, guid: b8c87203c18dcc740a96196f1ea4427b, type: 2}
     _attackDelay: 0.59

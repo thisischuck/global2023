@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RootPrefab: {fileID: 2915289770710951062, guid: f631f4b7817504f10adca68514cb9772, type: 3}
-  spawnCircleRadius: 20
+  spawnCircleRadius: 10
 --- !u!1 &8829406895413986207
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,5 +185,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waves:
   - {fileID: 11400000, guid: 752c089d90f4420418e590a006a2ac58, type: 2}
+  - {fileID: 11400000, guid: 871c279efb6aa5e41a53af328e380d09, type: 2}
   - {fileID: 11400000, guid: a6df7cfa0f7f27e46b147bdc8b9577c0, type: 2}
   _rootSystem: {fileID: 745134739172240226}

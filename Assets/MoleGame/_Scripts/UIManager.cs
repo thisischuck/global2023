@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     public void StartTimer(float timerDuration)
     {
         if(_isDisplayingTimer) return;
+        _timer.enabled = true;
         _t = timerDuration;
         _isDisplayingTimer = true;
     }

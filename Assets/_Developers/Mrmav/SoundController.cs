@@ -12,26 +12,33 @@ public class SoundController : MonoBehaviour
     public SimpleAudioEvent LoseSound = null;
     public SimpleAudioEvent WinSound = null;
 
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    private void Start()
     {
-        GameManager.Instance.OnLose += PlayLoseSound;
-        GameManager.Instance.OnWin  += PlayWinSound;
-        GameManager.Instance.OnGameMode += PlayGameModeSound;
-
         AmbientAudioEvent.Play();
     }
 
-    // Update is called once per frame
-    void Update()
+    // Start is called before the first frame update
+    void OnEnable()
     {
-        
+        GameManager.Instance.OnLose += PlayLoseSound;
+        GameManager.Instance.OnWin  += PlayWinSound;
+        GameManager.Instance.OnGamePhase += PlayGameModeSound; 
+    }
+
+    void OnDisable()
+    {
+        GameManager.Instance.OnLose -= PlayLoseSound;
+        GameManager.Instance.OnWin  -= PlayWinSound;
+        GameManager.Instance.OnGamePhase -= PlayGameModeSound;
     }
 
     void PlayLoseSound()
     {
         LoseSound.Play();
-
     }
 
     void PlayWinSound()
@@ -39,14 +46,14 @@ public class SoundController : MonoBehaviour
         WinSound.Play();
     }
 
-    void PlayGameModeSound(GameManager.GameMode mode)
+    void PlayGameModeSound(GameManager.GamePhase mode)
     {
 
-        if(mode == GameManager.GameMode.Wave)
+        if(mode == GameManager.GamePhase.Wave)
         {
             GameModeWave.Play();
 
-        } else if(mode == GameManager.GameMode.Shop)
+        } else if(mode == GameManager.GamePhase.Shop)
         {
             GameModeStore.Play();
         }

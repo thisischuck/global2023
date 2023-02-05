@@ -8,15 +8,15 @@ public class GameManager : MonoBehaviour
 
     public delegate void OnLoseDelegate();
     public delegate void OnWinDelegate();
-    public delegate void OnGameModeDelegate(GameMode mode);
+    public delegate void OnGamePhaseDelegate(GamePhase mode);
 
 
     public OnLoseDelegate OnLose;
     public OnWinDelegate OnWin;
-    public OnGameModeDelegate OnGameMode;
+    public OnGamePhaseDelegate OnGamePhase;
 
 
-    private GameMode _currentGameMode;
+    private GamePhase _currentGamePhase;
     private WaveManager _waveManager;
     private BaseManager _baseManager;
     private RootSystem _rootSystem;
@@ -47,28 +47,39 @@ public class GameManager : MonoBehaviour
         _waveManager = GetComponentInChildren<WaveManager>();
         _baseManager = GetComponentInChildren<BaseManager>();
         _rootSystem = GetComponentInChildren<RootSystem>();
+       
         _waveManager.StartNextWave();
     }
-    public void ChangeGameMode(GameMode newGameMode) 
+
+    public void ChangeGamePhase(GamePhase newGameMode) 
     {
-        _currentGameMode = newGameMode;
-        OnGameMode(_currentGameMode);
+        _currentGamePhase = newGameMode;
+        OnGamePhase(_currentGamePhase);
     }
+
     public void Lose() 
     {
-        Debug.Log("Loss requested.");
+        if(_currentGamePhase == GamePhase.Defeat) return;
+
+        ChangeGamePhase(GamePhase.Defeat);
+        Debug.Log("Loss requested!!!!!!!!!!");
         OnLose();
     }
 
     public void Win() 
     {
-        Debug.Log("Win requested.");
+        if(_currentGamePhase == GamePhase.Victory) return;
+
+        ChangeGamePhase(GamePhase.Victory);
+        Debug.Log("Win requested !!!!!!!!!!!!");
         OnWin();
     }
 
-    public enum GameMode
+    public enum GamePhase
     {
         Wave,
-        Shop
+        Shop,
+        Defeat,
+        Victory
     }
 }

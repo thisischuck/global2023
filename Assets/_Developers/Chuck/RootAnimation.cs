@@ -63,7 +63,7 @@ public class RootAnimation : MonoBehaviour
             //cry
         }
         
-        Debug.Log("Stopped");
+        // Debug.Log("Stopped");
         EnableCollisions();
 
         //Apply Vanish Maybe

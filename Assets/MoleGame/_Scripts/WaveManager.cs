@@ -10,11 +10,9 @@ public class WaveManager : MonoBehaviour
     private Wave _currentWave;
     public RootSystem _rootSystem;
 
-
-
     public Wave CurrentWave { get => _currentWave; }
 
-    private void Awake()
+    private void Start()
     {
         _waveIterator = _waves.GetEnumerator();
     }
@@ -34,7 +32,7 @@ public class WaveManager : MonoBehaviour
             GameManager.Instance.Win();
             return;
         }
-        
+        if(_currentWave)
         StartCoroutine(COR_Wave(_currentWave));
     }
 
@@ -43,7 +41,7 @@ public class WaveManager : MonoBehaviour
     {
         yield return StartCoroutine(COR_Rest(waveData));
 
-        GameManager.Instance.ChangeGameMode(GameManager.GameMode.Wave);
+        GameManager.Instance.ChangeGamePhase(GameManager.GamePhase.Wave);
         Debug.Log("Wave Started! Duration: " + waveData.Duration);
         _breachIterator = waveData.Breaches.GetEnumerator();
 
@@ -71,7 +69,8 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator COR_Rest(Wave waveData)
     {
-        GameManager.Instance.ChangeGameMode(GameManager.GameMode.Shop);
+
+        GameManager.Instance.ChangeGamePhase(GameManager.GamePhase.Shop);
 
         if (waveData.IsThereItemsOnWave())
             UIManager.Instance.OpenStore(waveData.PreWaveItems);
