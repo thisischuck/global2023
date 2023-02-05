@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: 
   _description: 
-  _roots: []
+  _roots:
+  - {fileID: 11400000, guid: 8af03f5e87a08634f9fb70d7d41595ae, type: 2}
+  - {fileID: 11400000, guid: 8af03f5e87a08634f9fb70d7d41595ae, type: 2}
+  - {fileID: 11400000, guid: 8af03f5e87a08634f9fb70d7d41595ae, type: 2}
+  - {fileID: 11400000, guid: 8af03f5e87a08634f9fb70d7d41595ae, type: 2}
   _angleOfAttack:
     minValue: 0
     maxValue: 359

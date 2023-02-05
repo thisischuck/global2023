@@ -6,6 +6,8 @@ public class Root : DescriptionBasedSO
 {
     [SerializeField] RootType _type;
     [SerializeField] int _hp;
+    [SerializeField] int _attackStep;
+    [SerializeField] int _attackDamage;
     [SerializeField] float _speed;
     [SerializeField] float _growthRate;
     [SerializeField][MinMaxRange(-90, 90)] float _coneAngle; //celcius
@@ -17,6 +19,8 @@ public class Root : DescriptionBasedSO
     public float GrowthRate { get => _growthRate; set => _growthRate = value; }
     public float ConeAngle { get => _coneAngle; set => _coneAngle = value; }
     public List<DamageTypes> Weaknesses { get => _weaknesses; }
+    public int AttackStep { get => _attackStep;  }
+    public int AttackDamage { get => _attackDamage; }
 
     /// <param name="damageType">weakness to compare against</param>
     /// <returns>true if contains weakness</returns>

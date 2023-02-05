@@ -15,8 +15,10 @@ MonoBehaviour:
   _name: Taproot
   _description: 
   _type: 0
-  _hp: 0
+  _hp: 2
+  _attackStep: 1
+  _attackDamage: 1
   _speed: 1
-  _growthRate: 1
+  _growthRate: 0.1
   _coneAngle: 30
   _weaknesses: 0200000000000000

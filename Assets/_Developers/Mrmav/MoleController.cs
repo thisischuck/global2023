@@ -11,14 +11,20 @@ public class MoleController : MonoBehaviour
 
     public GameObject RenderElement;
 
-    public float Radius = 60.0f;
+    private float _radius = 3f;
 
+#region Stats
     // the amout of follow direction when using the stick
     public float StickInputSize = 3f;
 
     // the slide effect of the mole
     public float SlideForce = 2.0f;
 
+    [SerializeField] float _attackDamage;
+    [SerializeField] float _attackStep;
+#endregion
+
+    private bool _isOnCooldown = false;
 
     private SpriteRenderer _sprite = null;
     private Vector3 _slideVelocity = Vector3.zero;
@@ -126,19 +132,30 @@ public class MoleController : MonoBehaviour
 
 
 
-        RenderElement.transform.rotation = Quaternion.Euler(0f, 0f, GetAngle() + 90);
+        transform.rotation = Quaternion.Euler(0f, 0f, GetAngle() + 90);
+        //RenderElement.transform.rotation = Quaternion.Euler(0f, 0f, GetAngle() + 90);
 
         // determine which side the force was applied at
         // and flip de sprite if needed
         Vector3 right = Vector3.Cross(transform.position.normalized, Vector3.forward);
         float dot = Vector3.Dot(force.normalized, right.normalized);
-        if (dot > 0)
-            _sprite.flipX = true;
-        else if (dot < 0)
-            _sprite.flipX = false;
-        // if 0, just leave it
+       
+        Flip(dot);
         //Debug.Log("Angle: " + GetAngle() + "___ To360: " + (360f - MathTools.To360(GetAngle())));
         oldPosition = this.transform.position;
+    }
+
+    private void Flip(float dot )
+    {
+        // if (dot > 0)
+        //     _sprite.flipX = true;
+        // else if (dot < 0)
+        //     _sprite.flipX = faslse;
+
+        if (dot > 0)
+            transform.localScale = new Vector3(-1,1,0);
+        else if (dot < 0)
+           transform.localScale = new Vector3(1,1,0);
     }
 
     public Vector3 CalculateMovementForce(Vector3 input)
@@ -154,19 +171,17 @@ public class MoleController : MonoBehaviour
         Vector3 force = direction * StickInputSize * Time.deltaTime;
 
 
-        Debug.DrawLine(Vector3.zero, side * Radius, Color.blue);
-        Debug.DrawLine(Vector3.zero, input * Radius, Color.yellow);
+        Debug.DrawLine(Vector3.zero, side * _radius, Color.blue);
+        Debug.DrawLine(Vector3.zero, input * _radius, Color.yellow);
         Debug.DrawLine(transform.position, transform.position + direction * 4.0f, Color.red);
         Debug.DrawLine(Vector3.zero, transform.position, Color.green);
 
         return force;
-
-
     }
 
     public void ApplyForce(Vector3 force)
     {
-        transform.position = (transform.position.normalized + force) * Radius;
+        transform.position = (transform.position.normalized + force) * _radius;
     }
 
     public float CalculateSpeed()
@@ -189,5 +204,25 @@ public class MoleController : MonoBehaviour
         }
         return angle;
     }
+
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.tag != "Root") return;
+        if(_isOnCooldown) return;
+        
+        StartCoroutine(COR_Bite(other.GetComponentInParent<RootAnimation>()));
+    }
+
+    private IEnumerator COR_Bite(RootAnimation biteTarget)
+    {
+        _isOnCooldown = true;
+        biteTarget.LoseHealth(_attackDamage );
+        Debug.Log("Damaged: " + _attackDamage);
+        yield return Yielders.Get(_attackStep);
+        _isOnCooldown = false;
+
+    }
+
 
 }
