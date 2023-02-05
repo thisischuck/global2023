@@ -27,9 +27,9 @@ public class SoundController : MonoBehaviour
         GameManager.Instance.OnWin  += PlayWinSound;
         GameManager.Instance.OnGamePhase += PlayGameModeSound;
 
-        // GameManager.Instance.Player.OnEat   += PlayEatSound;
-        // GameManager.Instance.Player.OnSlide += PlaySlideSound;
-        // GameManager.Instance.Player.OnUnlockItem += PlayUnlockItemSound;
+        GameManager.Instance.Player.OnEat   += PlayEatSound;
+        GameManager.Instance.Player.OnSlide += PlaySlideSound;
+        GameManager.Instance.Player.OnUnlockItem += PlayUnlockItemSound;
 
     }
 
@@ -39,9 +39,9 @@ public class SoundController : MonoBehaviour
         GameManager.Instance.OnWin -= PlayWinSound;
         GameManager.Instance.OnGamePhase -= PlayGameModeSound;
 
-        // GameManager.Instance.Player.OnEat   -= PlayEatSound;
-        // GameManager.Instance.Player.OnSlide -= PlaySlideSound;
-        // GameManager.Instance.Player.OnUnlockItem -= PlayUnlockItemSound;
+        GameManager.Instance.Player.OnEat   -= PlayEatSound;
+        GameManager.Instance.Player.OnSlide -= PlaySlideSound;
+        GameManager.Instance.Player.OnUnlockItem -= PlayUnlockItemSound;
 
     }
 
@@ -69,9 +69,9 @@ public class SoundController : MonoBehaviour
         DirtSound.Play();
     }
 
-    void PlayUnlockItemSound()
+    void PlayUnlockItemSound(Item item)
     {
-        //UnlockItem.Play();
+        UnlockItemSound.Play();
     }
 
     void PlayGameModeSound(GameManager.GamePhase mode)

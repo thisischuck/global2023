@@ -52,6 +52,8 @@ public class MoleController : MonoBehaviour
     private Volume _pp = null;
     private Animator _animator;
 
+    private bool _wasSliding = false;
+
     private float speed;
     private Vector3 oldPosition;
 
@@ -196,6 +198,7 @@ public class MoleController : MonoBehaviour
             ApplyForce(Vector3.down * _slideForce * Time.deltaTime);
         } else
         {
+            _wasSliding = false;
             _animator.SetBool("Sliding", false);
         }
 
@@ -299,8 +302,16 @@ public class MoleController : MonoBehaviour
 
 
     public bool IsSliding()
-    {
-        return _slideTime > _slideDelay;
+    {   
+        bool slide = _slideTime > _slideDelay;
+
+        if (slide && !_wasSliding)
+        {
+            OnSlide?.Invoke();
+            _wasSliding = true;
+        }
+
+        return slide;
     }
 
 }
