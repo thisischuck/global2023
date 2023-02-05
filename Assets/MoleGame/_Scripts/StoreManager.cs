@@ -48,6 +48,7 @@ public class StoreManager : MonoBehaviour
                 slot.IsAvailable = false;
                 slot.SlotImage.sprite = null;
 
+                HideStore();
                 return slot.SlotItem;
             } 
         }
@@ -64,6 +65,7 @@ public class StoreManager : MonoBehaviour
                 slot.SlotImage.sprite = null;
             
                 // GameManager.Instance.Player.UnlockAbility(slot.SlotItem);
+                HideStore();
             } 
         }
     }
