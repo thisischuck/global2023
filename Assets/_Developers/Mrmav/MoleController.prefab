@@ -172,11 +172,18 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   RenderElement: {fileID: 6598910987056068619}
-  StickInputSize: 6
-  SlideForce: 3
-  SlideTimer: 0.5
-  _attackDamage: 1
-  _attackStep: 1
+  _unlockedItems: []
+  _speed: 3
+  _slideForce: 2
+  _biteDamage: 1
+  _biteCooldown: 1.5
+  _vignetteAmount: 0
+  _minMaxDamage:
+    minValue: 0.1
+    maxValue: 10.000001
+  _minMaxScale:
+    minValue: 0.5
+    maxValue: 1.037509
 --- !u!95 &3688939713455526809
 Animator:
   serializedVersion: 5

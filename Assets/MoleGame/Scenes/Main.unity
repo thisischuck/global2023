@@ -158,6 +158,9 @@ MonoBehaviour:
   GameModeWave: {fileID: 11400000, guid: 4de968cab90f1014da82369b0e696b7a, type: 2}
   LoseSound: {fileID: 11400000, guid: 5cb6c01d7f0a7714bb457317c9de6006, type: 2}
   WinSound: {fileID: 11400000, guid: 8256c093e07d85b409e4d3692371cc8b, type: 2}
+  DirtSound: {fileID: 0}
+  EatSound: {fileID: 0}
+  UnlockItemSound: {fileID: 0}
 --- !u!4 &160011519
 Transform:
   m_ObjectHideFlags: 0
@@ -333,10 +336,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
-      propertyPath: SlideTimer
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5710463493863462890, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
       propertyPath: m_Name
       value: MoleController
@@ -488,6 +487,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1408384953, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
+      propertyPath: SmoothOff
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2067082386, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7488073690791646888, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
       propertyPath: _store
       value: 
@@ -584,6 +591,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1428280669}
+    - target: {fileID: 7488073690791646891, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7488073690791646893, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
       propertyPath: m_Name
       value: CanvasMain
@@ -965,6 +976,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2105061203}
+    - target: {fileID: 7059217684652033337, guid: 2776e7d7fb956b7448ffdfa1618ec1fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7059217685387560347, guid: 2776e7d7fb956b7448ffdfa1618ec1fc, type: 3}
       propertyPath: m_Name
       value: CanvasStore(And Touch)

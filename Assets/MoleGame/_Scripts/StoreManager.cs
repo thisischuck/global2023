@@ -14,6 +14,22 @@ public class StoreManager : MonoBehaviour
         HideStore();
     }
 
+    /// <summary>
+    /// This function is called when the object becomes enabled and active.
+    /// </summary>
+    private void OnEnable()
+    {
+        GameManager.Instance.Player.OnInteract += DirectSelectSlotItem;
+    }
+
+    /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    private void OnDisable()
+    {
+        GameManager.Instance.Player.OnInteract -= DirectSelectSlotItem;
+    }
+
     public void UpdateAvailableStock(List<Item> stock)
     {
         ClearStock();
@@ -48,6 +64,7 @@ public class StoreManager : MonoBehaviour
                 slot.IsAvailable = false;
                 slot.SlotImage.sprite = null;
 
+                HideStore();
                 return slot.SlotItem;
             } 
         }
@@ -63,7 +80,8 @@ public class StoreManager : MonoBehaviour
                 slot.IsAvailable = false;
                 slot.SlotImage.sprite = null;
             
-                // GameManager.Instance.Player.UnlockAbility(slot.SlotItem);
+                GameManager.Instance.Player.UnlockItem(slot.SlotItem);
+                HideStore();
             } 
         }
     }
