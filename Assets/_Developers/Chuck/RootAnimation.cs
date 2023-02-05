@@ -19,6 +19,7 @@ public class RootAnimation : MonoBehaviour
     float _stunDuration = 1.2f;
     bool _isStunned = false;
     LineRenderer r;
+    Animator _animator;
 
     public bool IsStunned { get => _isStunned; }
 
@@ -31,6 +32,7 @@ public class RootAnimation : MonoBehaviour
         currentDirection = (targetPosition - currentDirection).normalized;
         StartCoroutine(Frame());
         _health = rootData.Hp;
+        _animator = this.GetComponent<Animator>();
     }
 
     public bool LoseHealth(float dano)
@@ -92,7 +94,9 @@ public class RootAnimation : MonoBehaviour
     private IEnumerator COR_GetStunned()
     {
         _isStunned = true;
+        _animator.SetBool("Stunned", true);
         yield return Yielders.Get(_stunDuration);
+        _animator.SetBool("Stunned", false);
         _isStunned = false;
     }
 

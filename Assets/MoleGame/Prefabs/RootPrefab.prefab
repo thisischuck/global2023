@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3507841217743733411}
   - component: {fileID: 2096778532}
   - component: {fileID: 6417517938856645288}
+  - component: {fileID: -4908197731063733431}
   m_Layer: 0
   m_Name: RootPrefab
   m_TagString: Root
@@ -196,7 +197,7 @@ LineRenderer:
       serializedVersion: 2
       key0: {r: 0.5283019, g: 0.3799934, b: 0.27162695, a: 1}
       key1: {r: 0.5294118, g: 0.38039216, b: 0.27058825, a: 1}
-      key2: {r: 0.9811321, g: 0.83481497, b: 0.58775365, a: 0}
+      key2: {r: 0.9811321, g: 0.83481497, b: 0.58775365, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -210,9 +211,9 @@ LineRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 0
+      atime0: 193
       atime1: 65535
-      atime2: 0
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -229,3 +230,23 @@ LineRenderer:
     generateLightingData: 1
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!95 &-4908197731063733431
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2915289770710951062}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29a64596aae4948b4a790637c5ea8f18, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
