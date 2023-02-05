@@ -181,31 +181,24 @@ public class MoleController : MonoBehaviour
 
         if (!thereWasInput)
         {
-
             _slideTime += Time.deltaTime;
-
-            if (CalculateSpeed() > 0.01f)
-            {
-                _animator.SetBool("Sliding", true);
-            }
-            else
-            {
-                _animator.SetBool("Sliding", false);
-            }
             Debug.DrawLine(transform.position, transform.position + Vector3.down * _slideForce, Color.magenta);
         }
         else
         {
-            _animator.SetBool("Sliding", false);
             _slideTime = 0;
 
         }
 
         if (IsSliding())
         {
+            _animator.SetBool("Sliding", true);
             ApplyForce(Vector3.down * _slideForce * Time.deltaTime);
+        } else
+        {
+            _animator.SetBool("Sliding", false);
         }
-        
+
 
         transform.rotation = Quaternion.Euler(0f, 0f, GetAngle() + 90);
         //RenderElement.transform.rotation = Quaternion.Euler(0f, 0f, GetAngle() + 90);
@@ -214,13 +207,13 @@ public class MoleController : MonoBehaviour
         // and flip de sprite if needed
         Vector3 right = Vector3.Cross(transform.position.normalized, Vector3.forward);
         float dot = Vector3.Dot(force.normalized, right.normalized);
-       
+
         Flip(dot);
         //Debug.Log("Angle: " + GetAngle() + "___ To360: " + (360f - MathTools.To360(GetAngle())));
         oldPosition = this.transform.position;
     }
 
-    private void Flip(float dot )
+    private void Flip(float dot)
     {
         // if (dot > 0)
         //     _sprite.flipX = true;
@@ -228,9 +221,9 @@ public class MoleController : MonoBehaviour
         //     _sprite.flipX = faslse;
 
         if (dot > 0)
-            transform.localScale = new Vector3(-1,1,0);
+            transform.localScale = new Vector3(-1, 1, 0);
         else if (dot < 0)
-           transform.localScale = new Vector3(1,1,0);
+            transform.localScale = new Vector3(1, 1, 0);
     }
 
     public Vector3 CalculateMovementForce(Vector3 input)
@@ -288,9 +281,9 @@ public class MoleController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.tag != "Root") return;
-        if(_isOnCooldown) return;
-        
+        if (other.tag != "Root") return;
+        if (_isOnCooldown) return;
+
         StartCoroutine(COR_Bite(other.GetComponentInParent<RootAnimation>()));
     }
 
