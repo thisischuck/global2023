@@ -15,8 +15,9 @@ MonoBehaviour:
   _name: Wave_03
   _description: 
   _preWaveItems:
+  - {fileID: 11400000, guid: a097f0d347801e74194ce0281abbfbc9, type: 2}
   - {fileID: 11400000, guid: eeede354e56f54141864dcb3423b93ae, type: 2}
-  - {fileID: 11400000, guid: 22753ae609b627c42ba25be32484d7a9, type: 2}
+  - {fileID: 11400000, guid: 75892f38db9fd8b4286ed4466f59591e, type: 2}
   _restDuration: 9
   _breaches:
   - _breachData: {fileID: 11400000, guid: b8c87203c18dcc740a96196f1ea4427b, type: 2}
