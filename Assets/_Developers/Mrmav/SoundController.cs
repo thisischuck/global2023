@@ -10,6 +10,9 @@ public class SoundController : MonoBehaviour
     public SimpleAudioEvent GameModeWave = null;
     public SimpleAudioEvent LoseSound = null;
     public SimpleAudioEvent WinSound = null;
+    public SimpleAudioEvent DirtSound = null;
+    public SimpleAudioEvent EatSound = null;
+    public SimpleAudioEvent UnlockItemSound = null;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,11 @@ public class SoundController : MonoBehaviour
         GameManager.Instance.OnLose += PlayLoseSound;
         GameManager.Instance.OnWin  += PlayWinSound;
         GameManager.Instance.OnGamePhase += PlayGameModeSound;
+
+        // GameManager.Instance.Player.OnEat   += PlayEatSound;
+        // GameManager.Instance.Player.OnSlide += PlaySlideSound;
+        // GameManager.Instance.Player.OnUnlockItem += PlayUnlockItemSound;
+
     }
 
     private void OnDisable()
@@ -30,6 +38,11 @@ public class SoundController : MonoBehaviour
         GameManager.Instance.OnLose -= PlayLoseSound;
         GameManager.Instance.OnWin -= PlayWinSound;
         GameManager.Instance.OnGamePhase -= PlayGameModeSound;
+
+        // GameManager.Instance.Player.OnEat   -= PlayEatSound;
+        // GameManager.Instance.Player.OnSlide -= PlaySlideSound;
+        // GameManager.Instance.Player.OnUnlockItem -= PlayUnlockItemSound;
+
     }
 
     void PlayLoseSound()
@@ -40,7 +53,25 @@ public class SoundController : MonoBehaviour
 
     void PlayWinSound()
     {
-        WinSound.Play();
+        if(!SoundtrackAudioEvent.IsPlaying())
+        {
+            SoundtrackAudioEvent.Play();
+        }
+    }
+
+    void PlayEatSound()
+    {
+        EatSound.Play();
+    }
+
+    void PlaySlideSound()
+    {
+        DirtSound.Play();
+    }
+
+    void PlayUnlockItemSound()
+    {
+        //UnlockItem.Play();
     }
 
     void PlayGameModeSound(GameManager.GamePhase mode)

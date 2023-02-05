@@ -142,8 +142,10 @@ public class MoleController : MonoBehaviour
         {
             _animator.SetBool("Sliding", true);
             ApplyForce(Vector3.down * SlideForce * Time.deltaTime);
+        } else
+        {
+            _animator.SetBool("Sliding", false);
         }
-        else _animator.SetBool("Sliding", false);
 
 
 
