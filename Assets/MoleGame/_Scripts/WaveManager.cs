@@ -10,11 +10,9 @@ public class WaveManager : MonoBehaviour
     private Wave _currentWave;
     public RootSystem _rootSystem;
 
-
-
     public Wave CurrentWave { get => _currentWave; }
 
-    private void Awake()
+    private void Start()
     {
         _waveIterator = _waves.GetEnumerator();
     }
@@ -34,7 +32,7 @@ public class WaveManager : MonoBehaviour
             GameManager.Instance.Win();
             return;
         }
-        
+        if(_currentWave)
         StartCoroutine(COR_Wave(_currentWave));
     }
 
@@ -43,8 +41,8 @@ public class WaveManager : MonoBehaviour
     {
         yield return StartCoroutine(COR_Rest(waveData));
 
-        GameManager.Instance.ChangeGameMode(GameManager.GameMode.Wave);
-        Debug.Log("Wave Started! Duration: " + waveData.Duration);
+        GameManager.Instance.ChangeGamePhase(GameManager.GamePhase.Wave);
+        Debug.Log("Wave Started!" );
         _breachIterator = waveData.Breaches.GetEnumerator();
 
         UIManager.Instance.EnableBreachWarning(waveData.Breaches[0].BreachData.AngleOfAttack);
@@ -61,23 +59,27 @@ public class WaveManager : MonoBehaviour
             {
                 _rootSystem.CreateRoot(item, breach.BreachData.AngleOfAttack);
             }
-            // RootSystem.Add(breach.BreachData.Roots,breach.BreachData.AngleOfAttack)
-            // WIP For each root, root system .add Root
         }
-
+        
+        // Wait until there are no roots left to move to next Wave;
+        yield return new WaitUntil(()=> _rootSystem.RootCount() <= 0);
         Debug.Log("Wave Completed!");
+
+        GameManager.Instance.TimeFighting += Mathf.RoundToInt(waveData.Duration);
+        GameManager.Instance.WavesConquered++;
         StartNextWave();
     }
 
     private IEnumerator COR_Rest(Wave waveData)
     {
-        GameManager.Instance.ChangeGameMode(GameManager.GameMode.Shop);
+        GameManager.Instance.ChangeGamePhase(GameManager.GamePhase.Shop);
 
         if (waveData.IsThereItemsOnWave())
             UIManager.Instance.OpenStore(waveData.PreWaveItems);
 
         UIManager.Instance.StartTimer(waveData.RestDuration);
         yield return Yielders.Get(waveData.RestDuration);
+        GameManager.Instance.TimeSleeping += Mathf.RoundToInt(waveData.RestDuration);
 
         if (waveData.IsThereItemsOnWave())
             UIManager.Instance.CloseStore();

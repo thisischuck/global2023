@@ -12,24 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9043d40ed16ef6409559681307ce5ea, type: 3}
   m_Name: Wave_02
   m_EditorClassIdentifier: 
-  _name: Wave_01
+  _name: Wave_02
   _description: 
   _preWaveItems:
-  - {fileID: 11400000, guid: eeede354e56f54141864dcb3423b93ae, type: 2}
+  - {fileID: 11400000, guid: 22753ae609b627c42ba25be32484d7a9, type: 2}
   - {fileID: 11400000, guid: 22753ae609b627c42ba25be32484d7a9, type: 2}
   _restDuration: 9
   _breaches:
-  - _breachData: {fileID: 11400000, guid: b8c87203c18dcc740a96196f1ea4427b, type: 2}
-    _attackDelay: 0.59
+  - _breachData: {fileID: 11400000, guid: 243269fc383f3384e9ecdb7df3a191ba, type: 2}
+    _attackDelay: 1
+  - _breachData: {fileID: 11400000, guid: cedad7bfc396f8d43a352b6a2caf680c, type: 2}
+    _attackDelay: 0
+  - _breachData: {fileID: 11400000, guid: cedad7bfc396f8d43a352b6a2caf680c, type: 2}
+    _attackDelay: 4
   - _breachData: {fileID: 11400000, guid: 74189f78ec89f124e8eb7ede37a1ac35, type: 2}
-    _attackDelay: 1.25
-  - _breachData: {fileID: 11400000, guid: b8c87203c18dcc740a96196f1ea4427b, type: 2}
-    _attackDelay: 2.1
-  - _breachData: {fileID: 11400000, guid: 74189f78ec89f124e8eb7ede37a1ac35, type: 2}
-    _attackDelay: 2.17
-  - _breachData: {fileID: 11400000, guid: b8c87203c18dcc740a96196f1ea4427b, type: 2}
-    _attackDelay: 2.18
-  - _breachData: {fileID: 11400000, guid: 74189f78ec89f124e8eb7ede37a1ac35, type: 2}
-    _attackDelay: 2.23
-  - _breachData: {fileID: 11400000, guid: dcb23fbc95fbb2947a5eb1b0bf918e5b, type: 2}
-    _attackDelay: 1.04
+    _attackDelay: 0

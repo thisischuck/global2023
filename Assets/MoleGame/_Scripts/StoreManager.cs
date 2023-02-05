@@ -53,6 +53,21 @@ public class StoreManager : MonoBehaviour
         }
         return null;
     }
+
+    public void DirectSelectSlotItem(float angleOfInteraction)
+    {
+        foreach (var slot in _itemSlots)
+        {
+            if(slot.IsInteractable(angleOfInteraction))
+            {
+                slot.IsAvailable = false;
+                slot.SlotImage.sprite = null;
+            
+                // GameManager.Instance.Player.UnlockAbility(slot.SlotItem);
+            } 
+        }
+    }
+    
     
     private void ClearStock()
     {

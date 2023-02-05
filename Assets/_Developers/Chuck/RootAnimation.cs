@@ -12,7 +12,12 @@ public class RootAnimation : MonoBehaviour
 
     float _health;
 
+    [SerializeField] GameObject _temp;
+    float _stunDuration = 1.2f;
+    bool _isStunned = false;
     LineRenderer r;
+
+    public bool IsStunned { get => _isStunned;  }
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +32,14 @@ public class RootAnimation : MonoBehaviour
 
     public bool LoseHealth(float dano)
     {
+        StartCoroutine(COR_GetStunned());
         _health -= dano;
-        return _health < 0;
+        if(_health < 0)
+        {
+            Death();
+            return true;
+        }
+        return false;
     }
 
     IEnumerator Frame()
@@ -48,15 +59,42 @@ public class RootAnimation : MonoBehaviour
             var i = r.positionCount;
             r.positionCount += 1;
             r.SetPosition(i, newPosition);
-            yield return new WaitForSecondsRealtime(rootData.GrowthRate);
+            yield return Yielders.Get(rootData.GrowthRate);
             //cry
         }
-        Debug.Log("Stopped");
+        
+        // Debug.Log("Stopped");
+        EnableCollisions();
+
         //Apply Vanish Maybe
+        // Damage Base if stopped, and not stunned
+        while(!_isStunned)
+        {
+            GameManager.Instance.BaseManager.DamageBase(rootData.AttackDamage);
+            yield return Yielders.Get(rootData.AttackStep);
+        }
+    }
+
+    private void EnableCollisions()
+    {
+        var o = Instantiate(_temp, currentPosition, Quaternion.identity, this.transform);
+        var collider = (CircleCollider2D)o.AddComponent(typeof(CircleCollider2D));
+        collider.isTrigger = true;
+        collider.radius = 1f;
+        o.name = "Trigger";
+        o.tag = this.tag;
+    }
+
+    private IEnumerator COR_GetStunned()
+    {
+        _isStunned = true;
+        yield return Yielders.Get(_stunDuration);
+        _isStunned = false;
     }
 
     public void Death()
     {
+        GameManager.Instance.RootSystem.RemoveRoot(this); // This sucks, but works.
         Destroy(this.gameObject);
     }
 }

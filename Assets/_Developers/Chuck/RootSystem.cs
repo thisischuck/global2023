@@ -22,6 +22,18 @@ public class RootSystem : MonoBehaviour
         RootList.Add(o);
     }
 
+    public void RemoveRoot(RootAnimation rootElement)
+    {
+        if(RootList.Contains(rootElement.gameObject))
+        {
+            GameManager.Instance.RootsAnnihilated ++;
+            RootList.Remove(rootElement.gameObject);
+        }else
+        {
+            Debug.Log("Cant removed a non existent Root u dummy");
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +45,12 @@ public class RootSystem : MonoBehaviour
         return RootList.Count;
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Callback to draw gizmos that are pickable and always drawn.
+    /// </summary>
+    private void OnDrawGizmos()
     {
-
+        Gizmos.DrawWireSphere(Vector3.zero,spawnCircleRadius);
     }
+
 }

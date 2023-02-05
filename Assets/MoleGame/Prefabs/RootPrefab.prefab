@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6417517938856645288}
   m_Layer: 0
   m_Name: RootPrefab
-  m_TagString: Untagged
+  m_TagString: Root
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   rootData: {fileID: 0}
   targetPosition: {x: 0, y: 0}
   parent: {fileID: 2915289770710951062}
+  _temp: {fileID: 6636095744640397132, guid: b50597084b6433f40a28dc075de6d8c2, type: 3}
 --- !u!120 &6417517938856645288
 LineRenderer:
   m_ObjectHideFlags: 0

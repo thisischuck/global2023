@@ -18,6 +18,6 @@ MonoBehaviour:
   _restDuration: 9
   _breaches:
   - _breachData: {fileID: 11400000, guid: 2e30633640f94fc4e9195470c8094bd1, type: 2}
-    _attackDelay: 0.4
+    _attackDelay: 1
   - _breachData: {fileID: 11400000, guid: 2e30633640f94fc4e9195470c8094bd1, type: 2}
     _attackDelay: 3.25
