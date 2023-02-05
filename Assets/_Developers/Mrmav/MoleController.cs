@@ -189,7 +189,7 @@ public class MoleController : MonoBehaviour
 
     public void ApplyForce(Vector3 force)
     {
-        transform.position = (transform.position.normalized + force) * _radius;
+        transform.position = (transform.position + force).normalized * _radius;
     }
 
     public float CalculateSpeed()

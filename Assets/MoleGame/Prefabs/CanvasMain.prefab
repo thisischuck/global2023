@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 1494155386971441062}
   - component: {fileID: 4916728806546464615}
   - component: {fileID: 5014767418856435975}
+  - component: {fileID: 1408384953}
   m_Layer: 5
   m_Name: Backgroud
   m_TagString: Untagged
@@ -152,6 +153,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1408384953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067082386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f81be08db7dd3a948b4670b94bf5ba1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mole: {fileID: 0}
+  EffectSize: 0.1
+  SmoothOff: 0.95
+  MaxEffectSize: 0.1
 --- !u!1 &7488073690208290534
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e74e572b40142464d9064cc65ad52c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _statsManager: {fileID: 0}
   _store: {fileID: 0}
   _warningCircle: {fileID: 7488073690771821611}
   _timer: {fileID: 7488073690208290532}
