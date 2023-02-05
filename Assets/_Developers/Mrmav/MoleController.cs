@@ -13,6 +13,8 @@ public class MoleController : MonoBehaviour
 
     private float _radius = 3f;
 
+    private Vector2 _input = Vector2.zero;
+
 #region Stats
     // the amout of follow direction when using the stick
     public float StickInputSize = 3f;
@@ -67,6 +69,7 @@ public class MoleController : MonoBehaviour
         Vector2 stickValues = MovementStickAction.ReadValue<Vector2>();
         Vector2 kbInput = MovementInputAction.ReadValue<Vector2>();
         Vector3 force = Vector3.zero;
+        _input = stickValues;
 
         bool thereWasInput = false;
 
@@ -75,6 +78,7 @@ public class MoleController : MonoBehaviour
             // joystick
             force = CalculateMovementForce(stickValues);
             thereWasInput = true;
+            _input = stickValues;
 
         }
         else if (kbInput.magnitude > 0.01f)
@@ -88,6 +92,8 @@ public class MoleController : MonoBehaviour
                 fakeStick = new Vector3(-transform.position.normalized.y, transform.position.normalized.x);
             else
                 fakeStick = new Vector3(transform.position.normalized.y, -transform.position.normalized.x);
+
+            _input = fakeStick;
 
             force = CalculateMovementForce(fakeStick);
 
@@ -105,6 +111,8 @@ public class MoleController : MonoBehaviour
                 fakeStick = new Vector3(-transform.position.normalized.y, transform.position.normalized.x);
             else
                 fakeStick = new Vector3(transform.position.normalized.y, -transform.position.normalized.x);
+
+            _input = fakeStick;
 
             force = CalculateMovementForce(fakeStick);
 
@@ -203,6 +211,11 @@ public class MoleController : MonoBehaviour
             angle = -angle;
         }
         return angle;
+    }
+
+    public Vector2 GetInput()
+    {
+        return _input;
     }
 
 
