@@ -10,6 +10,8 @@ public class RootAnimation : MonoBehaviour
     Vector2 currentPosition;
     Vector2 currentDirection;
 
+    float _health;
+
     LineRenderer r;
 
     // Start is called before the first frame update
@@ -20,6 +22,13 @@ public class RootAnimation : MonoBehaviour
         //targetPosition = this.transform.InverseTransformPoint(targetPosition);
         currentDirection = (targetPosition - currentDirection).normalized;
         StartCoroutine(Frame());
+        _health = rootData.Hp;
+    }
+
+    public bool LoseHealth(float dano)
+    {
+        _health -= dano;
+        return _health < 0;
     }
 
     IEnumerator Frame()
@@ -44,5 +53,10 @@ public class RootAnimation : MonoBehaviour
         }
         Debug.Log("Stopped");
         //Apply Vanish Maybe
+    }
+
+    public void Death()
+    {
+        Destroy(this.gameObject);
     }
 }

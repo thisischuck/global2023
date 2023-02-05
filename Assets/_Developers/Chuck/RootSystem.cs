@@ -7,7 +7,7 @@ public class RootSystem : MonoBehaviour
     public GameObject RootPrefab;
     public float spawnCircleRadius = 10;
 
-    public List<GameObject> RootList;
+    private List<GameObject> RootList;
 
     public void CreateRoot(Root rootData, RangedFloat AngleOfAttack)
     {
@@ -26,6 +26,11 @@ public class RootSystem : MonoBehaviour
     void Start()
     {
         RootList = new List<GameObject>();
+    }
+
+    public int RootCount()
+    {
+        return RootList.Count;
     }
 
     // Update is called once per frame
