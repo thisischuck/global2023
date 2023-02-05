@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31cef8f8d8b10ce41b9f8fe880771f3a, type: 3}
+  m_Name: breach_down_easy
+  m_EditorClassIdentifier: 
+  _name: 
+  _description: 
+  _roots:
+  - {fileID: 11400000, guid: 8af03f5e87a08634f9fb70d7d41595ae, type: 2}
+  - {fileID: 11400000, guid: 8af03f5e87a08634f9fb70d7d41595ae, type: 2}
+  _angleOfAttack:
+    minValue: 133.59518
+    maxValue: 270.90137
+  _firstAttackWarningDuration: 0

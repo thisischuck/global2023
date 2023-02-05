@@ -158,9 +158,9 @@ MonoBehaviour:
   GameModeWave: {fileID: 11400000, guid: 4de968cab90f1014da82369b0e696b7a, type: 2}
   LoseSound: {fileID: 11400000, guid: 5cb6c01d7f0a7714bb457317c9de6006, type: 2}
   WinSound: {fileID: 11400000, guid: 8256c093e07d85b409e4d3692371cc8b, type: 2}
-  DirtSound: {fileID: 0}
-  EatSound: {fileID: 0}
-  UnlockItemSound: {fileID: 0}
+  DirtSound: {fileID: 11400000, guid: 39993485b070f504f85dbbc171c0e46e, type: 2}
+  EatSound: {fileID: 11400000, guid: 14699d4020ab0e44b8ed35e11f9bb14e, type: 2}
+  UnlockItemSound: {fileID: 11400000, guid: 929368433a096874eb399c1e77db3166, type: 2}
 --- !u!4 &160011519
 Transform:
   m_ObjectHideFlags: 0
@@ -1012,6 +1012,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2550974623307045774, guid: 859933a1b249f374ba86f5f7fcd73414, type: 3}
+      propertyPath: _hitPoints
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 8829406895413986201, guid: 859933a1b249f374ba86f5f7fcd73414, type: 3}
       propertyPath: _player
       value: 
@@ -1064,5 +1068,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8829406895609192948, guid: 859933a1b249f374ba86f5f7fcd73414, type: 3}
+      propertyPath: _waves.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8829406895609192948, guid: 859933a1b249f374ba86f5f7fcd73414, type: 3}
+      propertyPath: _waves.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 22a5ed15d768d0d4cbcb414d47bd9f25, type: 2}
+    - target: {fileID: 8829406895609192948, guid: 859933a1b249f374ba86f5f7fcd73414, type: 3}
+      propertyPath: _waves.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 696bb68a9f0762f4b8e18e006ed1b212, type: 2}
+    - target: {fileID: 8829406895609192948, guid: 859933a1b249f374ba86f5f7fcd73414, type: 3}
+      propertyPath: _waves.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 25829ee23ab71e54cbb209da1c1d4bdb, type: 2}
+    - target: {fileID: 8829406895609192948, guid: 859933a1b249f374ba86f5f7fcd73414, type: 3}
+      propertyPath: _waves.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: e8577c7c49016364db13fe327313fce0, type: 2}
+    - target: {fileID: 8829406895609192948, guid: 859933a1b249f374ba86f5f7fcd73414, type: 3}
+      propertyPath: _waves.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 507a63d18146e1e4da5039e58790815a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 859933a1b249f374ba86f5f7fcd73414, type: 3}
