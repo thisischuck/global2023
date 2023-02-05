@@ -43,19 +43,20 @@ public class GameManager : MonoBehaviour
 
     #region Singleton
     private static GameManager _instance;
-    public static GameManager Instance 
-    {
-        get 
+    public static GameManager Instance { get => _instance; set => _instance = value; }
+    private void Awake() 
+    { 
+        if (_instance != null && _instance != this) 
         { 
-            if(_instance == null)
-                Debug.LogError("No Game Manager Available.");
-            return _instance;
+            Destroy(this); 
         } 
+        else 
+        { 
+            _instance = this; 
+        } 
+
     }
-
-
-
-    private void Awake() => _instance = this;
+    
     #endregion
 
     private void Start()
@@ -64,13 +65,13 @@ public class GameManager : MonoBehaviour
         _baseManager = GetComponentInChildren<BaseManager>();
         _rootSystem = GetComponentInChildren<RootSystem>();
        
-        _waveManager.StartNextWave();
+        _waveManager.StartFirstWave();
     }
 
     public void ChangeGamePhase(GamePhase newGameMode) 
     {
         _currentGamePhase = newGameMode;
-        OnGamePhase(_currentGamePhase);
+        OnGamePhase?.Invoke(_currentGamePhase);
         Debug.Log("changing game phase to " + _currentGamePhase);
     }
 
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
         ChangeGamePhase(GamePhase.Defeat);
         Debug.Log("Loss requested!!!!!!!!!!");
         UIManager.Instance.DisplayStats();
-        OnLose();
+        OnLose?.Invoke();
         
         Time.timeScale = 0;
     }
@@ -93,7 +94,7 @@ public class GameManager : MonoBehaviour
         ChangeGamePhase(GamePhase.Victory);
         Debug.Log("Win requested !!!!!!!!!!!!");
         UIManager.Instance.DisplayStats();
-        OnWin();
+        OnWin?.Invoke();
 
         Time.timeScale = 0;
     }

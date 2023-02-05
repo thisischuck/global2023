@@ -13,18 +13,22 @@ public class MoleController : MonoBehaviour
 
     private float _radius = 3f;
 
+    private float _slideTime = 0f;
+
     private Vector2 _input = Vector2.zero;
 
-#region Stats
+    #region Stats
     // the amout of follow direction when using the stick
     public float StickInputSize = 3f;
 
     // the slide effect of the mole
     public float SlideForce = 2.0f;
 
+    public float SlideTimer = 0.25f;
+
     [SerializeField] float _attackDamage;
     [SerializeField] float _attackStep;
-#endregion
+    #endregion
 
     private bool _isOnCooldown = false;
 
@@ -125,18 +129,22 @@ public class MoleController : MonoBehaviour
 
         if (!thereWasInput)
         {
-            ApplyForce(Vector3.down * SlideForce * Time.deltaTime);
-            if (CalculateSpeed() > 0.01f)
-            {
-                _animator.SetBool("Sliding", true);
-            }
-            else
-            {
-                _animator.SetBool("Sliding", false);
-            }
+            _slideTime += Time.deltaTime;
             Debug.DrawLine(transform.position, transform.position + Vector3.down * SlideForce, Color.magenta);
         }
+        else
+        {
+            _slideTime = 0;
+
+        }
+
+        if (IsSliding())
+        {
+            _animator.SetBool("Sliding", true);
+            ApplyForce(Vector3.down * SlideForce * Time.deltaTime);
+        }
         else _animator.SetBool("Sliding", false);
+
 
 
 
@@ -147,13 +155,13 @@ public class MoleController : MonoBehaviour
         // and flip de sprite if needed
         Vector3 right = Vector3.Cross(transform.position.normalized, Vector3.forward);
         float dot = Vector3.Dot(force.normalized, right.normalized);
-       
+
         Flip(dot);
         //Debug.Log("Angle: " + GetAngle() + "___ To360: " + (360f - MathTools.To360(GetAngle())));
         oldPosition = this.transform.position;
     }
 
-    private void Flip(float dot )
+    private void Flip(float dot)
     {
         // if (dot > 0)
         //     _sprite.flipX = true;
@@ -161,9 +169,9 @@ public class MoleController : MonoBehaviour
         //     _sprite.flipX = faslse;
 
         if (dot > 0)
-            transform.localScale = new Vector3(-1,1,0);
+            transform.localScale = new Vector3(-1, 1, 0);
         else if (dot < 0)
-           transform.localScale = new Vector3(1,1,0);
+            transform.localScale = new Vector3(1, 1, 0);
     }
 
     public Vector3 CalculateMovementForce(Vector3 input)
@@ -189,7 +197,7 @@ public class MoleController : MonoBehaviour
 
     public void ApplyForce(Vector3 force)
     {
-        transform.position = (transform.position.normalized + force) * _radius;
+        transform.position = (transform.position + force).normalized * _radius;
     }
 
     public float CalculateSpeed()
@@ -221,21 +229,26 @@ public class MoleController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(other.tag != "Root") return;
-        if(_isOnCooldown) return;
-        
+        if (other.tag != "Root") return;
+        if (_isOnCooldown) return;
+
         StartCoroutine(COR_Bite(other.GetComponentInParent<RootAnimation>()));
     }
 
     private IEnumerator COR_Bite(RootAnimation biteTarget)
     {
         _isOnCooldown = true;
-        biteTarget.LoseHealth(_attackDamage );
+        biteTarget.LoseHealth(_attackDamage);
         Debug.Log("Damaged: " + _attackDamage);
         yield return Yielders.Get(_attackStep);
         _isOnCooldown = false;
 
     }
 
+
+    public bool IsSliding()
+    {
+        return _slideTime > SlideTimer;
+    }
 
 }

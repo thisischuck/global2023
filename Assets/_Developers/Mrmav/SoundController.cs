@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SoundController : MonoBehaviour
 {
-
     public SimpleAudioEvent SoundtrackAudioEvent = null;
     public SimpleAudioEvent AmbientAudioEvent = null;
     public SimpleAudioEvent GameModeStore = null;
@@ -15,26 +14,28 @@ public class SoundController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AmbientAudioEvent.Play(null, true);
+        SoundtrackAudioEvent.Play();        
+    }
+
+    private void OnEnable()
+    {
         GameManager.Instance.OnLose += PlayLoseSound;
         GameManager.Instance.OnWin  += PlayWinSound;
         GameManager.Instance.OnGamePhase += PlayGameModeSound;
-
-        AmbientAudioEvent.Play(null, true);
-        SoundtrackAudioEvent.Play();
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        GameManager.Instance.OnLose -= PlayLoseSound;
+        GameManager.Instance.OnWin -= PlayWinSound;
+        GameManager.Instance.OnGamePhase -= PlayGameModeSound;
     }
 
     void PlayLoseSound()
     {
         LoseSound.Play();
         SoundtrackAudioEvent.Stop();
-
     }
 
     void PlayWinSound()
@@ -59,7 +60,6 @@ public class SoundController : MonoBehaviour
             if(mode == GameManager.GamePhase.Wave)
                 SoundtrackAudioEvent.Play();
         }
-
     }
 
 }
