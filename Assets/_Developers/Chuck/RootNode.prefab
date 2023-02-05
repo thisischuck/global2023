@@ -48,6 +48,7 @@ MonoBehaviour:
   rootData: {fileID: 0}
   targetPosition: {x: 0, y: 0}
   parent: {fileID: 2915289770710951062}
+  _temp: {fileID: 0}
 --- !u!120 &6417517938856645288
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -105,6 +106,15 @@ LineRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -3.2446134
+        outSlope: -3.2446134
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.05482459
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

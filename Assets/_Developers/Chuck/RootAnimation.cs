@@ -7,6 +7,9 @@ public class RootAnimation : MonoBehaviour
     public Root rootData;
     public Vector2 targetPosition;
     public GameObject parent;
+
+    public List<AnimationCurve> curves;
+
     Vector2 currentPosition;
     Vector2 currentDirection;
 
@@ -17,7 +20,7 @@ public class RootAnimation : MonoBehaviour
     bool _isStunned = false;
     LineRenderer r;
 
-    public bool IsStunned { get => _isStunned;  }
+    public bool IsStunned { get => _isStunned; }
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +37,7 @@ public class RootAnimation : MonoBehaviour
     {
         StartCoroutine(COR_GetStunned());
         _health -= dano;
-        if(_health < 0)
+        if (_health < 0)
         {
             Death();
             return true;
@@ -48,6 +51,7 @@ public class RootAnimation : MonoBehaviour
         {
             //get a new position randomly withing the new threshold cone.
             //chose an angle to go towards;
+            r.widthCurve = curves[Random.Range(0, curves.Count)];
             float angleCelcius = Random.Range(-rootData.ConeAngle, rootData.ConeAngle);
             Vector2 dir = targetPosition - currentPosition;
             //dir = dir.normalized * 0.3f + currentDirection * 0.7f;
@@ -62,13 +66,13 @@ public class RootAnimation : MonoBehaviour
             yield return Yielders.Get(rootData.GrowthRate);
             //cry
         }
-        
+
         // Debug.Log("Stopped");
         EnableCollisions();
 
         //Apply Vanish Maybe
         // Damage Base if stopped, and not stunned
-        while(!_isStunned)
+        while (!_isStunned)
         {
             GameManager.Instance.BaseManager.DamageBase(rootData.AttackDamage);
             yield return Yielders.Get(rootData.AttackStep);

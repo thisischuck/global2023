@@ -48,6 +48,71 @@ MonoBehaviour:
   rootData: {fileID: 0}
   targetPosition: {x: 0, y: 0}
   parent: {fileID: 2915289770710951062}
+  curves:
+  - serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.0891528
+      outSlope: -0.0891528
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.33333334
+      outWeight: 0.04263809
+    - serializedVersion: 3
+      time: 0.9
+      value: 0.05
+      inSlope: -2.2100227
+      outSlope: Infinity
+      tangentMode: 97
+      weightedMode: 3
+      inWeight: 0.35186931
+      outWeight: 0.34203282
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2.4558518
+      outSlope: -2.4558518
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0.32432565
+      outWeight: 0.33333334
+    m_PreInfinity: 0
+    m_PostInfinity: 0
+    m_RotationOrder: 0
+  - serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0041656494
+      value: 1
+      inSlope: -0.002917731
+      outSlope: -0.002917731
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.33333334
+      outWeight: 0.79599965
+    - serializedVersion: 3
+      time: 0.9
+      value: 0.1
+      inSlope: -0.1450685
+      outSlope: Infinity
+      tangentMode: 97
+      weightedMode: 3
+      inWeight: 0.44392487
+      outWeight: 0.29424256
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.05390835
+      outSlope: -0.05390835
+      tangentMode: 0
+      weightedMode: 1
+      inWeight: 0.37667257
+      outWeight: 0.33333334
+    m_PreInfinity: 0
+    m_PostInfinity: 0
+    m_RotationOrder: 0
   _temp: {fileID: 6636095744640397132, guid: b50597084b6433f40a28dc075de6d8c2, type: 3}
 --- !u!120 &6417517938856645288
 LineRenderer:
@@ -69,7 +134,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 4a8ee986a02d84ddca65862eb5bbffc5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,6 +171,24 @@ LineRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9127776
+        value: 0.11070202
+        inSlope: -0.86067283
+        outSlope: -0.86067283
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0.09134616
+        inSlope: -0.39860114
+        outSlope: -0.39860114
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.07236844
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -141,8 +224,8 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 2
     shadowBias: 0.5
-    generateLightingData: 0
+    generateLightingData: 1
   m_UseWorldSpace: 1
   m_Loop: 0
