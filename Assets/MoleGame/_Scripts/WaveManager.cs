@@ -60,13 +60,19 @@ public class WaveManager : MonoBehaviour
             {
                 _rootSystem.CreateRoot(item, breach.BreachData.AngleOfAttack);
             }
-            // RootSystem.Add(breach.BreachData.Roots,breach.BreachData.AngleOfAttack)
-            // WIP For each root, root system .add Root
+
+            //yield return new WaitUntil(()=> _rootSystem.RootCount <= 0);
         }
 
         Debug.Log("Wave Completed!");
         StartNextWave();
     }
+
+   // private bool IsThereAnyRootsLeft()
+    //{
+     //   if(_rootSystem.RootCount <= 0) return false;
+    //    return true;
+    //}
 
     private IEnumerator COR_Rest(Wave waveData)
     {
