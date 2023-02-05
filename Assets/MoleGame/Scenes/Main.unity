@@ -123,6 +123,56 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &160011517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 160011519}
+  - component: {fileID: 160011518}
+  m_Layer: 0
+  m_Name: SoundController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &160011518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160011517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5090fbbe344ea8d4a988ff80ba73aa5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundtrackAudioEvent: {fileID: 11400000, guid: c803e5b65bfbcb74e9e0ea39ec316094, type: 2}
+  AmbientAudioEvent: {fileID: 11400000, guid: 90a80377a0de8664fb829434863480aa, type: 2}
+  GameModeStore: {fileID: 11400000, guid: 81e3ddd7b7171f340bd5424c26ad01bf, type: 2}
+  GameModeWave: {fileID: 11400000, guid: 4de968cab90f1014da82369b0e696b7a, type: 2}
+  LoseSound: {fileID: 11400000, guid: 5cb6c01d7f0a7714bb457317c9de6006, type: 2}
+  WinSound: {fileID: 11400000, guid: 8256c093e07d85b409e4d3692371cc8b, type: 2}
+--- !u!4 &160011519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160011517}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8276728, y: -0.2151888, z: -0.41640455}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &252401191
 GameObject:
   m_ObjectHideFlags: 0

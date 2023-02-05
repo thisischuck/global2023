@@ -34,7 +34,7 @@ public class WaveManager : MonoBehaviour
             GameManager.Instance.Win();
             return;
         }
-
+        
         StartCoroutine(COR_Wave(_currentWave));
     }
 
@@ -43,6 +43,7 @@ public class WaveManager : MonoBehaviour
     {
         yield return StartCoroutine(COR_Rest(waveData));
 
+        GameManager.Instance.ChangeGameMode(GameManager.GameMode.Wave);
         Debug.Log("Wave Started! Duration: " + waveData.Duration);
         _breachIterator = waveData.Breaches.GetEnumerator();
 
