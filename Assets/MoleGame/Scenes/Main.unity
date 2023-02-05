@@ -333,6 +333,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5503525914909457202, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
+      propertyPath: SlideTimer
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5710463493863462890, guid: e2f9b5ba858dfcd43a28af64f9007bc4, type: 3}
       propertyPath: m_Name
       value: MoleController
