@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81f8274e24b80a542b356410113a5ed8, type: 3}
-  m_Name: LoseGame
+  m_Name: Eat
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 7d888a785e42d0b49ac04eb5b0108828, type: 3}
+  - {fileID: 8300000, guid: 607d5155b99f3584b85d9e91a4fee4af, type: 3}
   volume:
-    minValue: 0.4855116
-    maxValue: 0.4855116
+    minValue: 0.8078061
+    maxValue: 1
   pitch:
-    minValue: 1.0005915
-    maxValue: 1.0005915
+    minValue: 0.8131282
+    maxValue: 1.2164401
   stereoPan:
-    minValue: 0
-    maxValue: 0
+    minValue: 0.00059149414
+    maxValue: 0.00059149414
