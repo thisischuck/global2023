@@ -15,24 +15,42 @@ public class SimpleAudioEvent : AudioEvent
     [MinMaxRange(-1, 1)]
 	public RangedFloat stereoPan;
 
-	public override void Play(AudioSource source = null)
+	private AudioSource _source = null;
+
+	public override void Play(AudioSource source = null, bool loop = false)
 	{
 		if (clips.Length == 0) return;
 
-        if(source == null) source = NewSource();
+        if(source == null) source = NewSource(loop);
+		_source = source;
 
 		source.clip = clips[Random.Range(0, clips.Length)];
 		source.volume = Random.Range(volume.minValue, volume.maxValue);
 		source.pitch = Random.Range(pitch.minValue, pitch.maxValue);
 		source.panStereo = Random.Range(stereoPan.minValue, stereoPan.maxValue);
+		source.loop = loop;
 		source.Play();
 	}
 
-    private AudioSource NewSource()
+    private AudioSource NewSource(bool destroy = false)
     {
         GameObject source = new GameObject(this.name + "_Dynamic");
-        Destroy(source, clips[0].length + .2f);
+		
+        if (destroy)
+			Destroy(source, clips[0].length + .2f);
 
         return source.AddComponent<AudioSource>();
     }
+	public bool IsPlaying()
+	{
+		return _source != null;
+	}
+
+	public void Stop()
+	{
+		if (IsPlaying())
+		{
+			_source.Stop();
+		}
+	}
 }

@@ -14,7 +14,7 @@ public class CompositeAudioEvent : AudioEvent
 
 	public CompositeEntry[] Entries;
 
-	public override void Play(AudioSource source = null)
+	public override void Play(AudioSource source = null, bool loop = false)
 	{
         if(source == null) source = NewSource();
 
@@ -31,7 +31,7 @@ public class CompositeAudioEvent : AudioEvent
 				continue;
 			}
 
-			Entries[i].Event.Play(source);
+			Entries[i].Event.Play(source, loop);
 			return;
 		}
 	}

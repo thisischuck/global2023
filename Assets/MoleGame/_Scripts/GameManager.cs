@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         get 
         { 
             if(_instance == null)
-            Debug.LogError("No Game Manager Available.");
+                Debug.LogError("No Game Manager Available.");
             return _instance;
         } 
     }
@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
     {
         _currentGamePhase = newGameMode;
         OnGamePhase(_currentGamePhase);
+        Debug.Log("changing game phase to " + _currentGamePhase);
     }
 
     public void Lose() 
