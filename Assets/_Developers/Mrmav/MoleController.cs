@@ -85,6 +85,9 @@ public class MoleController : MonoBehaviour
 
         ApplyForce(new Vector3(0.0f, -1.0f, 0.0f));
         oldPosition = this.transform.position;
+
+        _minMaxDamage.minValue = _biteDamage;
+        _minMaxScale.minValue = _sprite.transform.localScale.x;
     }
 
     public void UnlockItem(Item itemToUnlock)
@@ -109,12 +112,19 @@ public class MoleController : MonoBehaviour
         }
 
         UpdateVFX();
+
+        _unlockedItems.Clear();
     }
 
     void UpdateVFX()
     {
-        var newScale = new Vector3( MathTools.Remap(_biteDamage,_minMaxDamage.minValue,_minMaxDamage.maxValue,_minMaxScale.minValue, _minMaxScale.maxValue), MathTools.Remap(_biteDamage,_minMaxDamage.minValue,_minMaxDamage.maxValue,_minMaxScale.minValue, _minMaxScale.maxValue),transform.localScale.z);
+        var newScale = new Vector3(RemappedDamage(), RemappedDamage(), transform.localScale.z);
         _sprite.transform.localScale = newScale;
+    }
+
+    float RemappedDamage()
+    {
+        return MathTools.Remap(_biteDamage,_minMaxDamage.minValue,_minMaxDamage.maxValue,_minMaxScale.minValue, _minMaxScale.maxValue);
     }
 
     // Update is called once per frame

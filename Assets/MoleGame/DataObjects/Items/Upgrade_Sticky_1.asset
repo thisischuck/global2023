@@ -18,4 +18,4 @@ MonoBehaviour:
   _speedIncrement: 0
   _damageIncrement: 0
   _vignetteDecrement: 0
-  _slideDecrement: 0.2
+  _slideDecrement: 0.5

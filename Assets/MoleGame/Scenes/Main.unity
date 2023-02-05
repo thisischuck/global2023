@@ -487,12 +487,32 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1408384953, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
-      propertyPath: SmoothOff
+    - target: {fileID: 1625591931, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
+      propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2067082386, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 1625591931, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625591931, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014767418856435975, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014767418856435975, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014767418856435975, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014767418856435975, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
+      propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7488073690791646888, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
@@ -591,10 +611,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1428280669}
-    - target: {fileID: 7488073690791646891, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7488073690791646893, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
       propertyPath: m_Name
       value: CanvasMain
