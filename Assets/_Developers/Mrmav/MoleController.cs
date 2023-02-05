@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class MoleController : MonoBehaviour
 {
@@ -17,23 +18,38 @@ public class MoleController : MonoBehaviour
 
     private Vector2 _input = Vector2.zero;
 
-    #region Stats
-    // the amout of follow direction when using the stick
-    public float StickInputSize = 3f;
+#region Delegates
+    public delegate void OnEatDelegate();
+    public delegate void OnSlideDelegate();
+    public delegate void OnInteractDelegate(float currentAngle);
+    public delegate void OnUnlockItemDelegate(Item item);
 
-    // the slide effect of the mole
-    public float SlideForce = 2.0f;
+    public OnEatDelegate OnEat;
+    public OnSlideDelegate OnSlide;
+    public OnInteractDelegate OnInteract;
+    public OnUnlockItemDelegate OnUnlockItem;
 
-    public float SlideTimer = 0.25f;
+#endregion
+#region Stats
+    [Header("Stats")]
+    [SerializeField] private List<Item> _unlockedItems;
+    [SerializeField] private float _speed = 3f;
+    [SerializeField] private float _slideForce = 2.0f;
+    [SerializeField] float _biteDamage;
+    [SerializeField] float _biteCooldown;
+    [SerializeField] float _vignetteAmount;
+#endregion
 
-    [SerializeField] float _attackDamage;
-    [SerializeField] float _attackStep;
-    #endregion
+    [Header("Cap Amounts")]
+    [SerializeField] [MinMaxRange(.1f, 10)]RangedFloat _minMaxDamage;
+    [SerializeField] [MinMaxRange(.5f, 2)] RangedFloat _minMaxScale;
+
+    private float _slideDelay = 0.25f;
 
     private bool _isOnCooldown = false;
 
     private SpriteRenderer _sprite = null;
-    private Vector3 _slideVelocity = Vector3.zero;
+    private Volume _pp = null;
     private Animator _animator;
 
     private float speed;
@@ -47,6 +63,8 @@ public class MoleController : MonoBehaviour
         MovementInputAction.Enable();
         MovementStickAction.Enable();
         InteractInputAction.Enable();
+
+        InteractInputAction.performed += ctx => OnInteract?.Invoke(MathTools.To360(GetAngle()));
     }
 
     void OnDisable()
@@ -54,6 +72,8 @@ public class MoleController : MonoBehaviour
         MovementInputAction.Disable();
         MovementStickAction.Disable();
         InteractInputAction.Disable();
+        
+        InteractInputAction.performed -= ctx => OnInteract?.Invoke(MathTools.To360(GetAngle()));
     }
 
 
@@ -67,6 +87,36 @@ public class MoleController : MonoBehaviour
         oldPosition = this.transform.position;
     }
 
+    public void UnlockItem(Item itemToUnlock)
+    {
+        _unlockedItems.Add(itemToUnlock);
+        OnUnlockItem?.Invoke(itemToUnlock);
+        
+        UpdateStats();
+    }
+
+    void UpdateStats()
+    {
+        foreach (var item in _unlockedItems)
+        {
+            if(item is Upgrade)
+            {
+                var up = (Upgrade)item;
+                _speed += up.SpeedIncrement;
+                _biteDamage += up.DamageIncrement;
+                _slideForce -= up.SlideDecrement;
+            }
+        }
+
+        UpdateVFX();
+    }
+
+    void UpdateVFX()
+    {
+        var newScale = new Vector3( MathTools.Remap(_biteDamage,_minMaxDamage.minValue,_minMaxDamage.maxValue,_minMaxScale.minValue, _minMaxScale.maxValue), MathTools.Remap(_biteDamage,_minMaxDamage.minValue,_minMaxDamage.maxValue,_minMaxScale.minValue, _minMaxScale.maxValue),transform.localScale.z);
+        _sprite.transform.localScale = newScale;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -74,6 +124,8 @@ public class MoleController : MonoBehaviour
         Vector2 kbInput = MovementInputAction.ReadValue<Vector2>();
         Vector3 force = Vector3.zero;
         _input = stickValues;
+
+
 
         bool thereWasInput = false;
 
@@ -130,7 +182,7 @@ public class MoleController : MonoBehaviour
         if (!thereWasInput)
         {
             _slideTime += Time.deltaTime;
-            Debug.DrawLine(transform.position, transform.position + Vector3.down * SlideForce, Color.magenta);
+            Debug.DrawLine(transform.position, transform.position + Vector3.down * _slideForce, Color.magenta);
         }
         else
         {
@@ -141,13 +193,11 @@ public class MoleController : MonoBehaviour
         if (IsSliding())
         {
             _animator.SetBool("Sliding", true);
-            ApplyForce(Vector3.down * SlideForce * Time.deltaTime);
+            ApplyForce(Vector3.down * _slideForce * Time.deltaTime);
         } else
         {
             _animator.SetBool("Sliding", false);
         }
-
-
 
 
         transform.rotation = Quaternion.Euler(0f, 0f, GetAngle() + 90);
@@ -186,7 +236,7 @@ public class MoleController : MonoBehaviour
         Vector3 direction = side.normalized - transform.position.normalized;
 
         // scale up the direction and delta
-        Vector3 force = direction * StickInputSize * Time.deltaTime;
+        Vector3 force = direction * _speed * Time.deltaTime;
 
 
         Debug.DrawLine(Vector3.zero, side * _radius, Color.blue);
@@ -240,17 +290,17 @@ public class MoleController : MonoBehaviour
     private IEnumerator COR_Bite(RootAnimation biteTarget)
     {
         _isOnCooldown = true;
-        biteTarget.LoseHealth(_attackDamage);
-        Debug.Log("Damaged: " + _attackDamage);
-        yield return Yielders.Get(_attackStep);
+        biteTarget.LoseHealth(_biteDamage );
+        Debug.Log("Damaged: " + _biteDamage);
+        OnEat?.Invoke();
+        yield return Yielders.Get(_biteCooldown);
         _isOnCooldown = false;
-
     }
 
 
     public bool IsSliding()
     {
-        return _slideTime > SlideTimer;
+        return _slideTime > _slideDelay;
     }
 
 }

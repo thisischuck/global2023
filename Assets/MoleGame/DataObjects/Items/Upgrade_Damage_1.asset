@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78b08a183c7e9594b83dce7c6fe4f134, type: 3}
-  m_Name: Upgrade_Example
+  m_Name: Upgrade_Damage_1
   m_EditorClassIdentifier: 
   _name: Fancy Example Name
   _description: 
-  _storeIcon: {fileID: 21300000, guid: b6a96c7c65795c94abf54a62adbf5c38, type: 3}
+  _storeIcon: {fileID: 21300000, guid: 395f6b9556f14704790df6035be6ee3a, type: 3}
+  _speedIncrement: 0
+  _damageIncrement: 2
+  _vignetteDecrement: 0
+  _slideDecrement: 0
