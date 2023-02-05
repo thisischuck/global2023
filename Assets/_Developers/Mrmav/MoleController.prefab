@@ -172,8 +172,8 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   RenderElement: {fileID: 6598910987056068619}
-  StickInputSize: 3
-  SlideForce: 2
+  StickInputSize: 6
+  SlideForce: 3
   _attackDamage: 1
   _attackStep: 1
 --- !u!95 &3688939713455526809
