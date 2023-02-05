@@ -174,6 +174,7 @@ MonoBehaviour:
   RenderElement: {fileID: 6598910987056068619}
   StickInputSize: 6
   SlideForce: 3
+  SlideTimer: 0.5
   _attackDamage: 1
   _attackStep: 1
 --- !u!95 &3688939713455526809
