@@ -13,6 +13,8 @@ public class MoleController : MonoBehaviour
 
     private float _radius = 3f;
 
+    private float _slideTime = 0f;
+
     private Vector2 _input = Vector2.zero;
 
 #region Stats
@@ -21,6 +23,8 @@ public class MoleController : MonoBehaviour
 
     // the slide effect of the mole
     public float SlideForce = 2.0f;
+
+    public float SlideTimer = 0.25f;
 
     [SerializeField] float _attackDamage;
     [SerializeField] float _attackStep;
@@ -125,7 +129,9 @@ public class MoleController : MonoBehaviour
 
         if (!thereWasInput)
         {
-            ApplyForce(Vector3.down * SlideForce * Time.deltaTime);
+
+            _slideTime += Time.deltaTime;
+
             if (CalculateSpeed() > 0.01f)
             {
                 _animator.SetBool("Sliding", true);
@@ -136,7 +142,18 @@ public class MoleController : MonoBehaviour
             }
             Debug.DrawLine(transform.position, transform.position + Vector3.down * SlideForce, Color.magenta);
         }
-        else _animator.SetBool("Sliding", false);
+        else
+        {
+            _animator.SetBool("Sliding", false);
+            _slideTime = 0;
+
+        }
+
+        if (IsSliding())
+        {
+            ApplyForce(Vector3.down * SlideForce * Time.deltaTime);
+        }
+        
 
 
 
@@ -237,5 +254,10 @@ public class MoleController : MonoBehaviour
 
     }
 
+
+    public bool IsSliding()
+    {
+        return _slideTime > SlideTimer;
+    }
 
 }
