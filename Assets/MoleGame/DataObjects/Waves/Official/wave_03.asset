@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9043d40ed16ef6409559681307ce5ea, type: 3}
+  m_Name: wave_03
+  m_EditorClassIdentifier: 
+  _name: 
+  _description: 
+  _preWaveItems:
+  - {fileID: 11400000, guid: 75892f38db9fd8b4286ed4466f59591e, type: 2}
+  - {fileID: 11400000, guid: eeede354e56f54141864dcb3423b93ae, type: 2}
+  _restDuration: 10
+  _breaches:
+  - _breachData: {fileID: 11400000, guid: 76e843c39e08e904eb7aebce6b70f99a, type: 2}
+    _attackDelay: 0
+  - _breachData: {fileID: 11400000, guid: 506c1802160146145bb172e1d2f2b6a1, type: 2}
+    _attackDelay: 0
+  - _breachData: {fileID: 11400000, guid: 99b8451b2b34f0c4aa1ed30031c6f9b0, type: 2}
+    _attackDelay: 5
+  - _breachData: {fileID: 11400000, guid: f70835a7dd34a1042825cac92ba5138c, type: 2}
+    _attackDelay: 5
