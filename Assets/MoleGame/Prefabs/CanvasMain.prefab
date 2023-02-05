@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mole: {fileID: 0}
   EffectSize: 0.1
-  SmoothOff: 0.95
+  SmoothOff: 1
   MaxEffectSize: 0.1
 --- !u!1 &7488073690208290534
 GameObject:

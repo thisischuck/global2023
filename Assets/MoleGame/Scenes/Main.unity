@@ -158,6 +158,9 @@ MonoBehaviour:
   GameModeWave: {fileID: 11400000, guid: 4de968cab90f1014da82369b0e696b7a, type: 2}
   LoseSound: {fileID: 11400000, guid: 5cb6c01d7f0a7714bb457317c9de6006, type: 2}
   WinSound: {fileID: 11400000, guid: 8256c093e07d85b409e4d3692371cc8b, type: 2}
+  DirtSound: {fileID: 0}
+  EatSound: {fileID: 0}
+  UnlockItemSound: {fileID: 0}
 --- !u!4 &160011519
 Transform:
   m_ObjectHideFlags: 0
@@ -484,6 +487,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1408384953, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
+      propertyPath: SmoothOff
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2067082386, guid: 36e74441c2aee7e49ab79eaf73902033, type: 3}
       propertyPath: m_IsActive
       value: 1
