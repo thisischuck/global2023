@@ -12,13 +12,14 @@ public class WaveManager : MonoBehaviour
 
     public Wave CurrentWave { get => _currentWave; }
 
-    private void Start()
+    public void StartFirstWave()
     {
         _waveIterator = _waves.GetEnumerator();
+        StartNextWave();
     }
 
     [ContextMenu("Start Next Wave")]
-    public void StartNextWave()
+    private void StartNextWave()
     {
         StopAllCoroutines();
 
@@ -32,8 +33,9 @@ public class WaveManager : MonoBehaviour
             GameManager.Instance.Win();
             return;
         }
+
         if(_currentWave)
-        StartCoroutine(COR_Wave(_currentWave));
+            StartCoroutine(COR_Wave(_currentWave));
     }
 
 
