@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    public delegate void OnLoseDelegate();
+    public delegate void OnWinDelegate();
+    public delegate void OnGameModeDelegate(GameMode mode);
+
+
+    public OnLoseDelegate OnLose;
+    public OnWinDelegate OnWin;
+    public OnGameModeDelegate OnGameMode;
+
+
     private GameMode _currentGameMode;
     private WaveManager _waveManager;
     #region Singleton
@@ -30,16 +41,19 @@ public class GameManager : MonoBehaviour
     public void ChangeGameMode(GameMode newGameMode) 
     {
         _currentGameMode = newGameMode;
+        OnGameMode(_currentGameMode);
     }
 
     public void Lose() 
     {
         Debug.Log("Loss requested.");
+        OnLose();
     }
 
     public void Win() 
     {
         Debug.Log("Win requested.");
+        OnWin();
     }
 
     public enum GameMode
