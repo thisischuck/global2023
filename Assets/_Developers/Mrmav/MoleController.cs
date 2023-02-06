@@ -35,6 +35,7 @@ public class MoleController : MonoBehaviour
     [SerializeField] private List<Item> _unlockedItems;
     [SerializeField] private float _speed = 3f;
     [SerializeField] private float _slideForce = 2.0f;
+    [SerializeField] private float _slideVelocityCutOff = 0.8f;
     [SerializeField] float _biteDamage;
     [SerializeField] float _biteCooldown;
     [SerializeField] float _vignetteAmount;
@@ -44,12 +45,12 @@ public class MoleController : MonoBehaviour
     [SerializeField] [MinMaxRange(.1f, 10)]RangedFloat _minMaxDamage;
     [SerializeField] [MinMaxRange(.5f, 2)] RangedFloat _minMaxScale;
 
-    private float _slideDelay = 0.25f;
+    private float _slideDelay = 2.0f;
 
     private bool _isOnCooldown = false;
 
     private SpriteRenderer _sprite = null;
-    private Volume _pp = null;
+    //private Volume _pp = null;
     private Animator _animator;
 
     private bool _wasSliding = false;
@@ -137,8 +138,6 @@ public class MoleController : MonoBehaviour
         Vector3 force = Vector3.zero;
         _input = stickValues;
 
-
-
         bool thereWasInput = false;
 
         if (stickValues.magnitude > 0f)
@@ -147,6 +146,7 @@ public class MoleController : MonoBehaviour
             force = CalculateMovementForce(stickValues);
             thereWasInput = true;
             _input = stickValues;
+            Debug.Log("gamepad input");
 
         }
         else if (kbInput.magnitude > 0.01f)
@@ -187,52 +187,54 @@ public class MoleController : MonoBehaviour
             thereWasInput = true;
         }
 
-
         _animator.SetBool("Walking", force.magnitude > 0);
         ApplyForce(force);
 
         if (!thereWasInput)
         {
             _slideTime += Time.deltaTime;
-            Debug.DrawLine(transform.position, transform.position + Vector3.down * _slideForce, Color.magenta);
+            
+            if (IsSliding())
+            {
+                ApplyForce(Vector3.down * _slideForce * Time.deltaTime);
+
+                float speedPerSecond = CalculateVelocity().magnitude / Time.deltaTime;
+                if(speedPerSecond > _slideVelocityCutOff)
+                {
+                    _animator.SetBool("Sliding", true);
+                } else
+                {
+                    _animator.SetBool("Sliding", false);
+                }
+
+            } else
+            {
+                _wasSliding = false;
+            }
+
         }
         else
         {
             _slideTime = 0;
-
-        }
-
-        if (IsSliding())
-        {
-            _animator.SetBool("Sliding", true);
-            ApplyForce(Vector3.down * _slideForce * Time.deltaTime);
-        } else
-        {
-            _wasSliding = false;
             _animator.SetBool("Sliding", false);
+
         }
 
 
         transform.rotation = Quaternion.Euler(0f, 0f, GetAngle() + 90);
-        //RenderElement.transform.rotation = Quaternion.Euler(0f, 0f, GetAngle() + 90);
 
         // determine which side the force was applied at
         // and flip de sprite if needed
         Vector3 right = Vector3.Cross(transform.position.normalized, Vector3.forward);
         float dot = Vector3.Dot(force.normalized, right.normalized);
 
-        Flip(dot);
-        //Debug.Log("Angle: " + GetAngle() + "___ To360: " + (360f - MathTools.To360(GetAngle())));
+        Flip(dot);        
+        
         oldPosition = this.transform.position;
     }
 
     private void Flip(float dot)
     {
-        // if (dot > 0)
-        //     _sprite.flipX = true;
-        // else if (dot < 0)
-        //     _sprite.flipX = faslse;
-
         if (dot > 0)
             transform.localScale = new Vector3(-1, 1, 0);
         else if (dot < 0)
@@ -265,11 +267,11 @@ public class MoleController : MonoBehaviour
         transform.position = (transform.position + force).normalized * _radius;
     }
 
-    public float CalculateSpeed()
+    public Vector3 CalculateVelocity()
     {
-        float mag = (oldPosition - this.transform.position).magnitude;
-        return mag;
+        return oldPosition - transform.position;
     }
+
     // Returns the angle at which the controller is.
     // this is a value between 0 to 180 or 0 to -180.
     //    -90 is up
