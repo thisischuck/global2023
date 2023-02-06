@@ -46,7 +46,6 @@ public class BackgroundEffect : MonoBehaviour
         float t = MathTools.Remap(GameManager.Instance.BaseManager.HitPoints, 0, _maxHealth, 1, 0);
 
         background.color = Color.Lerp(Color.white, maxTint, t);
-        Debug.Log("Color:" + background.color);
 
         Debug.DrawLine(Vector3.zero, _translationEffect, Color.green);
     }
