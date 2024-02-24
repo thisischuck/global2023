@@ -20,11 +20,14 @@ public class BackgroundEffect : MonoBehaviour
 
     private Color maxTint = new Color(255 / 255, 163 / 255, 181 / 255);
 
+    private float _maxHealth;
+
     // Start is called before the first frame update
     void Start()
     {
         Mole = GameManager.Instance.Player;
         background = this.GetComponent<Image>();
+        _maxHealth = GameManager.Instance.BaseManager.HitPoints;
     }
 
     void LateUpdate()
@@ -40,10 +43,9 @@ public class BackgroundEffect : MonoBehaviour
 
         transform.position = new Vector3(_translationEffect.x, _translationEffect.y, 0.0f);
 
-        float t = MathTools.Remap(GameManager.Instance.BaseManager.HitPoints, 0, 25, 1, 0);
+        float t = MathTools.Remap(GameManager.Instance.BaseManager.HitPoints, 0, _maxHealth, 1, 0);
 
         background.color = Color.Lerp(Color.white, maxTint, t);
-        Debug.Log("Color:" + background.color);
 
         Debug.DrawLine(Vector3.zero, _translationEffect, Color.green);
     }
